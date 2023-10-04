@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  assisdance
+
+  Created by Cynthia Z France on 10/4/23.
+  
+*/
+"ContentView.WelcomeMessage" = "Hello, %@!!";
+"Login.UsernameField.Title" = "Username";
+"Login.PasswordField.Title" = "Password";
+"Login.LoginButton.Title" = "Login";
+"Login.UsernameField.Title" = "Username";
+"Login.PasswordField.Title" = "Password";
+"Login.LoginButton.Title" = "Login";
+"Home.Title" = "Welcome!";
+"Home.LogoutButton.Title" = "Logout";
