@@ -13,4 +13,8 @@ struct FormationBookModel {
     mutating func addSet(_ set: SetModel){
         sets.append(set)
     }
+    
+    func loadSets() {
+        return
+    }
 }

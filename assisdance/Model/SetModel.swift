@@ -6,10 +6,28 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct SetModel: Identifiable {
     
-    let id: UUID
+    var id: UUID
+    var name: String
+    var imageName: String
+    var image: Image
+    
+    init(name: String, imageName: String? = nil) {
+        self.id = UUID()
+        self.name = name
+        if let imageName = imageName {
+            self.imageName = imageName
+        }
+        else {
+            self.imageName = "defaultSetImage"
+        }
+        self.image = Image(self.imageName)
+        
+    }
+    
     private(set) var formations :[FormationModel] = []
     
     mutating func addFormation(_ formation: FormationModel) {
