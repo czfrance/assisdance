@@ -13,6 +13,8 @@ struct LoginScreen: View {
         VStack {
             Spacer()
             VStack {
+                Text("Login")
+                    .font(.system(size: 24, weight: .bold, design: .default))
                 TextField(
                     "Login.UsernameField.Title".localized,
                     text: $viewModel.username
@@ -31,7 +33,6 @@ struct LoginScreen: View {
                 
                 Divider()
             }
-            
             Spacer()
             
             Button(

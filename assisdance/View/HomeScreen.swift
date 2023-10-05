@@ -10,15 +10,24 @@ import SwiftUI
 struct HomeScreen: View {
     
     @ObservedObject var viewModel: HomeViewModel = HomeViewModel()
+    @EnvironmentObject var formationBook: FormationBookViewModel
     
     var body: some View {
         VStack {
             Spacer()
-            
             Text("Home.Title".localized)
                 .font(.system(size: 24, weight: .bold, design: .default))
-            
-            Spacer()
+
+            NavigationStack {
+                List(formationBook.sets) { danceSet in
+                    NavigationLink {
+                        SetView()
+                    } label: {
+                        HomeFormationCard(set: danceSet)
+                    }
+                }
+                .navigationTitle("Your Sets")
+            }
             
             Button(
                 action: viewModel.logout,
@@ -36,8 +45,26 @@ struct HomeScreen: View {
     }
 }
 
+struct HomeScreen_Previews_wrapper : View {
+    
+    func preview(formationBook: FormationBookViewModel) -> FormationBookViewModel {
+        let set1 = SetModel(name: "set 1")
+        let set2 = SetModel(name: "set 2")
+        formationBook.addSet(set1)
+        formationBook.addSet(set2)
+//        let a = [Schedule(name: "test", desc: "?", program: Programs.allCases[0]), Schedule(name: "test2", desc: "?", program: Programs.allCases[0])]
+//        model.database = a
+        return formationBook
+    }
+    
+    var body: some View {
+        HomeScreen()
+            .environmentObject(preview(formationBook: FormationBookViewModel()))
+    }
+}
+
 struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {
-        HomeScreen()
+        HomeScreen_Previews_wrapper()
     }
 }
