@@ -21,7 +21,7 @@ struct HomeScreen: View {
             NavigationStack {
                 List(formationBook.sets) { danceSet in
                     NavigationLink {
-                        SetView()
+                        SetView(set: danceSet)
                     } label: {
                         HomeFormationCard(set: danceSet)
                     }

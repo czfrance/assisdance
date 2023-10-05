@@ -17,8 +17,16 @@ struct RootScreen: View {
                 .environmentObject(formationBook)
                 .onAppear {
                     formationBook.loadSets()
-                    let tempSet1 = SetModel(name: "Example Set 1")
-                    let tempSet2 = SetModel(name: "Example Set 2")
+                    var tempSet1 = SetModel(name: "Example Set 1")
+                    var tempSet2 = SetModel(name: "Example Set 2")
+                    let formation1 = FormationModel(name: "formation 1")
+                    let formation2 = FormationModel(name: "formation 2")
+                    let formation3 = FormationModel(name: "formation 3")
+                    let formation4 = FormationModel(name: "formation 4")
+                    tempSet1.addFormation(formation1)
+                    tempSet1.addFormation(formation2)
+                    tempSet2.addFormation(formation3)
+                    tempSet2.addFormation(formation4)
                     formationBook.addSet(tempSet1)
                     formationBook.addSet(tempSet2)
                 }
@@ -31,5 +39,6 @@ struct RootScreen: View {
 struct RootScreen_Previews: PreviewProvider {
     static var previews: some View {
         RootScreen()
+            .environmentObject(Auth.shared)
     }
 }

@@ -8,13 +8,52 @@
 import SwiftUI
 
 struct SetView: View {
+    
+    @EnvironmentObject var formationBook: FormationBookViewModel
+    @State var set: SetModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader{ geometry in
+            VStack {
+                HStack {
+                    Spacer()
+                    Text(set.name).font(.system(size: 24, weight: .bold, design: .default))
+                    Spacer()
+                }
+                .padding(.top, 50)
+                Spacer()
+                ScrollView(.horizontal) {
+                    HStack(spacing: 20) {
+                        ForEach(set.formations) { formation in
+                            FormationView(formation: formation)
+                                .frame(height: geometry.size.height*0.5)
+                        }
+                    }
+                }
+                Spacer()
+            }
+        }
+    }
+}
+
+
+struct SetView_Previews_wrapper : View {
+    func preview() -> SetModel {
+        var curr_set = SetModel(name: "set")
+        let formation1 = FormationModel(name: "formation 1")
+        let formation2 = FormationModel(name: "formation 2")
+        curr_set.addFormation(formation1)
+        curr_set.addFormation(formation2)
+        return curr_set
+    }
+    
+    var body: some View {
+        SetView(set: preview())
     }
 }
 
 struct SetView_Previews: PreviewProvider {
     static var previews: some View {
-        SetView()
+        SetView_Previews_wrapper()
     }
 }
