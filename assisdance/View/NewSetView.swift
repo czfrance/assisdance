@@ -81,5 +81,6 @@ struct NewSetView: View {
 struct NewSetView_Previews: PreviewProvider {
     static var previews: some View {
         NewSetView()
+            .previewInterfaceOrientation(.landscapeLeft)
     }
 }

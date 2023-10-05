@@ -62,5 +62,6 @@ struct SetView_Previews_wrapper : View {
 struct SetView_Previews: PreviewProvider {
     static var previews: some View {
         SetView_Previews_wrapper()
+            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
