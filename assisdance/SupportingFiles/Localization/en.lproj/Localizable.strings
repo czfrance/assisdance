@@ -12,5 +12,5 @@
 "Login.UsernameField.Title" = "Username";
 "Login.PasswordField.Title" = "Password";
 "Login.LoginButton.Title" = "Login";
-"Home.Title" = "Welcome!";
+"Home.Title" = "Hello, how may I be of assisdance?";
 "Home.LogoutButton.Title" = "Logout";
