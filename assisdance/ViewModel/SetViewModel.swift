@@ -6,10 +6,24 @@
 //
 
 import Foundation
+import SwiftUI
 
 class SetViewModel: NSObject, ObservableObject {
 
-    @Published private var setModel =  SetModel(id: UUID())
+//    @Published private var setModel =  SetModel(id: UUID())
+    var setModel: SetModel
+    
+    init(setModel: SetModel) {
+        self.setModel = setModel
+    }
+    
+    var name: String {
+        return setModel.name
+    }
+    
+    var image: Image {
+        return Image(setModel.imageName)
+    }
 
     var formations: [FormationModel] {
         return setModel.formations

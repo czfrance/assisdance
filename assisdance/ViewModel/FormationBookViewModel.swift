@@ -18,4 +18,8 @@ class FormationBookViewModel: NSObject, ObservableObject {
     func addSet(_ set: SetModel){
         formationBookModel.addSet(set)
     }
+    
+    func loadSets() {
+        formationBookModel.loadSets()
+    }
 }
