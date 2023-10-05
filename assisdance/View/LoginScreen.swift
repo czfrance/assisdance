@@ -42,7 +42,7 @@ struct LoginScreen: View {
                         .font(.system(size: 24, weight: .bold, design: .default))
                         .frame(maxWidth: .infinity, maxHeight: 60)
                         .foregroundColor(Color.white)
-                        .background(Color.blue)
+                        .background(Color.mint)
                         .cornerRadius(10)
                 }
             )

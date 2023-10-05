@@ -27,7 +27,7 @@ struct HomeFormationCard: View {
 
 struct HomeFormationCard_Previews: PreviewProvider {
     static var previews: some View {
-        let set = SetModel(name: "formation 1")
+        let set = SetModel(name: "formation 1", numDancers: 5)
 //        let set = SetViewModel(setModel: setModel)
         HomeFormationCard(set: set)
     }

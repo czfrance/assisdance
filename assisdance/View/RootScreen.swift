@@ -17,8 +17,8 @@ struct RootScreen: View {
                 .environmentObject(formationBook)
                 .onAppear {
                     formationBook.loadSets()
-                    var tempSet1 = SetModel(name: "Example Set 1")
-                    var tempSet2 = SetModel(name: "Example Set 2")
+                    var tempSet1 = SetModel(name: "Example Set 1", numDancers: 5)
+                    var tempSet2 = SetModel(name: "Example Set 2", numDancers: 6)
                     let formation1 = FormationModel(name: "formation 1")
                     let formation2 = FormationModel(name: "formation 2")
                     let formation3 = FormationModel(name: "formation 3")

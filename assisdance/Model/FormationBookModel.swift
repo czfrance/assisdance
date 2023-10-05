@@ -17,4 +17,13 @@ struct FormationBookModel {
     func loadSets() {
         return
     }
+    
+    mutating func createNewSet(name: String, numDancers: Int) -> SetModel {
+        var newSet = SetModel(name: name, numDancers: numDancers)
+        let firstFormation = FormationModel(name: "formation 1")
+        newSet.addFormation(firstFormation)
+        sets.append(newSet)
+        
+        return newSet
+    }
 }

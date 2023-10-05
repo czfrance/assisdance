@@ -17,7 +17,10 @@ struct SetView: View {
             VStack {
                 HStack {
                     Spacer()
-                    Text(set.name).font(.system(size: 24, weight: .bold, design: .default))
+                    VStack {
+                        Text(set.name).font(.system(size: 24, weight: .bold, design: .default))
+                        Text("number of dancers: " + String(set.dancers))
+                    }
                     Spacer()
                 }
                 .padding(.top, 50)
@@ -31,6 +34,10 @@ struct SetView: View {
                     }
                 }
                 Spacer()
+                Button("Save") {
+                    formationBook.addSet(set)
+                }
+                .buttonStyle(.borderedProminent)
             }
         }
     }
@@ -39,7 +46,7 @@ struct SetView: View {
 
 struct SetView_Previews_wrapper : View {
     func preview() -> SetModel {
-        var curr_set = SetModel(name: "set")
+        var curr_set = SetModel(name: "set", numDancers: 5)
         let formation1 = FormationModel(name: "formation 1")
         let formation2 = FormationModel(name: "formation 2")
         curr_set.addFormation(formation1)

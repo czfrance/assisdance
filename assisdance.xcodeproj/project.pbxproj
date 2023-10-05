@@ -27,6 +27,7 @@
 		40A81EFC2ACE02DD00B7C7CF /* SetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A81EFB2ACE02DD00B7C7CF /* SetViewModel.swift */; };
 		40A81F002ACE798800B7C7CF /* SetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A81EFF2ACE798800B7C7CF /* SetView.swift */; };
 		40A81F022ACE990000B7C7CF /* FormationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A81F012ACE990000B7C7CF /* FormationView.swift */; };
+		40A81F042ACEA26800B7C7CF /* NewSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A81F032ACEA26800B7C7CF /* NewSetView.swift */; };
 		40D8182A2AA91368002C586B /* assisdanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D818292AA91368002C586B /* assisdanceApp.swift */; };
 		40D8182C2AA91368002C586B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8182B2AA91368002C586B /* ContentView.swift */; };
 		40D8182E2AA9136A002C586B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40D8182D2AA9136A002C586B /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 		40A81EFB2ACE02DD00B7C7CF /* SetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewModel.swift; sourceTree = "<group>"; };
 		40A81EFF2ACE798800B7C7CF /* SetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetView.swift; sourceTree = "<group>"; };
 		40A81F012ACE990000B7C7CF /* FormationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationView.swift; sourceTree = "<group>"; };
+		40A81F032ACEA26800B7C7CF /* NewSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSetView.swift; sourceTree = "<group>"; };
 		40D818262AA91368002C586B /* assisdance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = assisdance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D818292AA91368002C586B /* assisdanceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = assisdanceApp.swift; sourceTree = "<group>"; };
 		40D8182B2AA91368002C586B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				40A81EEE2ACDC5A400B7C7CF /* HomeFormationCard.swift */,
 				40A81EFF2ACE798800B7C7CF /* SetView.swift */,
 				40A81F012ACE990000B7C7CF /* FormationView.swift */,
+				40A81F032ACEA26800B7C7CF /* NewSetView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			files = (
 				40A81ED92ACD5E5D00B7C7CF /* StringExtensions.swift in Sources */,
 				40A81EE92ACD685C00B7C7CF /* HomeViewModel.swift in Sources */,
+				40A81F042ACEA26800B7C7CF /* NewSetView.swift in Sources */,
 				40A81ECC2ACD56DE00B7C7CF /* LoginScreen.swift in Sources */,
 				40A81F002ACE798800B7C7CF /* SetView.swift in Sources */,
 				40A81EED2ACD6A9600B7C7CF /* RootScreen.swift in Sources */,

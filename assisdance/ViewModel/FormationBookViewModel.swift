@@ -22,4 +22,8 @@ class FormationBookViewModel: NSObject, ObservableObject {
     func loadSets() {
         formationBookModel.loadSets()
     }
+    
+    func createNewSet(name: String, numDancers: Int) -> SetModel {
+        return formationBookModel.createNewSet(name: name, numDancers: numDancers)
+    }
 }

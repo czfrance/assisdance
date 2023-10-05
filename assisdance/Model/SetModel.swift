@@ -14,10 +14,12 @@ struct SetModel: Identifiable {
     var name: String
     var imageName: String
     var image: Image
+    var dancers: Int
     
-    init(name: String, imageName: String? = nil) {
+    init(name: String, numDancers: Int, imageName: String? = nil) {
         self.id = UUID()
         self.name = name
+        self.dancers = numDancers
         if let imageName = imageName {
             self.imageName = imageName
         }
@@ -25,12 +27,15 @@ struct SetModel: Identifiable {
             self.imageName = "defaultSetImage"
         }
         self.image = Image(self.imageName)
-        
     }
     
     private(set) var formations :[FormationModel] = []
     
     mutating func addFormation(_ formation: FormationModel) {
         formations.append(formation)
+    }
+    
+    func numDancers() -> Int {
+        return dancers
     }
 }
