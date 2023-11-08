@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		408522412AF236B8005BAAAE /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408522402AF236B8005BAAAE /* DrawingView.swift */; };
+		408522432AF38BA6005BAAAE /* DancerIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408522422AF38BA6005BAAAE /* DancerIcon.swift */; };
 		40A81ECC2ACD56DE00B7C7CF /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A81ECB2ACD56DD00B7C7CF /* LoginScreen.swift */; };
 		40A81ED12ACD5D0F00B7C7CF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40A81ED32ACD5D0F00B7C7CF /* Localizable.strings */; };
 		40A81ED92ACD5E5D00B7C7CF /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A81ED82ACD5E5D00B7C7CF /* StringExtensions.swift */; };
@@ -35,6 +37,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		408522402AF236B8005BAAAE /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
+		408522422AF38BA6005BAAAE /* DancerIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DancerIcon.swift; sourceTree = "<group>"; };
 		40A81ECB2ACD56DD00B7C7CF /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		40A81ED22ACD5D0F00B7C7CF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		40A81ED42ACD5D4A00B7C7CF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 				40A81EFF2ACE798800B7C7CF /* SetView.swift */,
 				40A81F012ACE990000B7C7CF /* FormationView.swift */,
 				40A81F032ACEA26800B7C7CF /* NewSetView.swift */,
+				408522402AF236B8005BAAAE /* DrawingView.swift */,
+				408522422AF38BA6005BAAAE /* DancerIcon.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -268,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40A81ED92ACD5E5D00B7C7CF /* StringExtensions.swift in Sources */,
+				408522432AF38BA6005BAAAE /* DancerIcon.swift in Sources */,
 				40A81EE92ACD685C00B7C7CF /* HomeViewModel.swift in Sources */,
 				40A81F042ACEA26800B7C7CF /* NewSetView.swift in Sources */,
 				40A81ECC2ACD56DE00B7C7CF /* LoginScreen.swift in Sources */,
@@ -280,6 +287,7 @@
 				40A81EDE2ACD60A800B7C7CF /* LoginRequest.swift in Sources */,
 				40A81EDC2ACD605200B7C7CF /* LoginViewModel.swift in Sources */,
 				40A81EE72ACD67FB00B7C7CF /* HomeScreen.swift in Sources */,
+				408522412AF236B8005BAAAE /* DrawingView.swift in Sources */,
 				40D8182A2AA91368002C586B /* assisdanceApp.swift in Sources */,
 				40A81EF62ACDE8B000B7C7CF /* SetModel.swift in Sources */,
 				40A81EE02ACD610B00B7C7CF /* LoginResponse.swift in Sources */,
@@ -358,7 +366,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -413,7 +421,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -431,6 +439,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"assisdance/Preview Content\"";
+				DEVELOPMENT_TEAM = 2J6DGH8CZV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -459,6 +468,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"assisdance/Preview Content\"";
+				DEVELOPMENT_TEAM = 2J6DGH8CZV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

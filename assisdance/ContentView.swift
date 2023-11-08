@@ -9,18 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
+//        VStack {
+//            RootScreen()
+//                .environmentObject(Auth.shared)
+//        }
+//        .padding()
+//        DrawingView()
         VStack {
-//            Image(systemName: "globe")
-//                .imageScale(.large)
-//                .foregroundColor(.accentColor)
-//            Text("ContentView.WelcomeMessage".localized(arguments: "Peter"))
-            RootScreen()
-                .environmentObject(Auth.shared)
+            DrawingView()
+            ZStack {
+                DancerIcon(posx: 0.0, posy: 0.0)
+                DancerIcon(posx: 100.0, posy: 100.0)
+            }
         }
-        .padding()
     }
 }
-
+//profric
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
