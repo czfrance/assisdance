@@ -90,7 +90,7 @@ struct DancerIcon: Shape {
 struct DancerIcon_Previews: PreviewProvider {
     static var previews: some View {
         let dancer = DancerModel(position: [50.0, 50.0])
-        let formation = FormationModel(name: "formation", dancers: [])
+        let formation = FormationModel(name: "formation", dancers: [], tag: 0)
         DancerIcon(formation: formation, dancer: dancer, posx: 100.0, posy: 100.0)
     }
 }

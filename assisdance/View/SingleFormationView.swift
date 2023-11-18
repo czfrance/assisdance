@@ -29,7 +29,7 @@ struct SingleFormationView_Previews: PreviewProvider {
     static var previews: some View {
         let dancer1 = DancerModel(position: [25.0, 25.0])
         let dancer2 = DancerModel(position: [50.0, 50.0])
-        let formation = FormationModel(name: "Formation 1", dancers: [dancer1, dancer2])
+        let formation = FormationModel(name: "Formation 1", dancers: [dancer1, dancer2], tag: 0)
         SingleFormationView(formation: formation)
     }
 }
