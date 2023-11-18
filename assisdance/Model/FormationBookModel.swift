@@ -94,7 +94,7 @@ struct FormationBookModel {
         var newSet = SetModel(name: name, numDancers: numDancers)
         let dancer1 = DancerModel(position: [25.0, 25.0])
         let dancer2 = DancerModel(position: [50.0, 50.0])
-        let firstFormation = FormationModel(name: "formation 1", dancers: [dancer1, dancer2])
+        let firstFormation = FormationModel(name: "formation 1", dancers: [dancer1, dancer2], tag: 0)
         newSet.addFormation(firstFormation)
         self.addSet(newSet)
         

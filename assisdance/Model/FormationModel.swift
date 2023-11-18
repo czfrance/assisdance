@@ -7,18 +7,22 @@
 
 import Foundation
 
-struct FormationModel: Identifiable, Codable {
+struct FormationModel: Identifiable, Codable, Equatable {
+    static func == (lhs: FormationModel, rhs: FormationModel) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     let id: UUID
     let name: String
 //    var dancers: Dictionary<UUID, DancerModel>
     var dancers: [DancerModel]
-//    var tag: Int
+    var tag: Int
     
-    init(name: String, dancers: [DancerModel]) {
+    init(name: String, dancers: [DancerModel], tag: Int) {
         self.id = UUID()
         self.name = name
         self.dancers = dancers
-//        self.tag = tag
+        self.tag = tag
     }
     
 //    mutating func updateDancer(dId: UUID, x: Double, y: Double) {
