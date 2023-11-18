@@ -30,6 +30,8 @@
 		40A81F002ACE798800B7C7CF /* SetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A81EFF2ACE798800B7C7CF /* SetView.swift */; };
 		40A81F022ACE990000B7C7CF /* FormationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A81F012ACE990000B7C7CF /* FormationView.swift */; };
 		40A81F042ACEA26800B7C7CF /* NewSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A81F032ACEA26800B7C7CF /* NewSetView.swift */; };
+		40C33CD22B0591D4002B7459 /* SingleFormationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C33CD12B0591D4002B7459 /* SingleFormationView.swift */; };
+		40C33CD42B05F3BD002B7459 /* DancerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C33CD32B05F3BC002B7459 /* DancerModel.swift */; };
 		40D8182A2AA91368002C586B /* assisdanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D818292AA91368002C586B /* assisdanceApp.swift */; };
 		40D8182C2AA91368002C586B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8182B2AA91368002C586B /* ContentView.swift */; };
 		40D8182E2AA9136A002C586B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40D8182D2AA9136A002C586B /* Assets.xcassets */; };
@@ -61,6 +63,8 @@
 		40A81EFF2ACE798800B7C7CF /* SetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetView.swift; sourceTree = "<group>"; };
 		40A81F012ACE990000B7C7CF /* FormationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationView.swift; sourceTree = "<group>"; };
 		40A81F032ACEA26800B7C7CF /* NewSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSetView.swift; sourceTree = "<group>"; };
+		40C33CD12B0591D4002B7459 /* SingleFormationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleFormationView.swift; sourceTree = "<group>"; };
+		40C33CD32B05F3BC002B7459 /* DancerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DancerModel.swift; sourceTree = "<group>"; };
 		40D818262AA91368002C586B /* assisdance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = assisdance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D818292AA91368002C586B /* assisdanceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = assisdanceApp.swift; sourceTree = "<group>"; };
 		40D8182B2AA91368002C586B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,6 +95,7 @@
 				40A81F032ACEA26800B7C7CF /* NewSetView.swift */,
 				408522402AF236B8005BAAAE /* DrawingView.swift */,
 				408522422AF38BA6005BAAAE /* DancerIcon.swift */,
+				40C33CD12B0591D4002B7459 /* SingleFormationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -103,6 +108,7 @@
 				40A81EF02ACDC8F600B7C7CF /* FormationBookModel.swift */,
 				40A81EF22ACDCFEB00B7C7CF /* FormationModel.swift */,
 				40A81EF52ACDE8B000B7C7CF /* SetModel.swift */,
+				40C33CD32B05F3BC002B7459 /* DancerModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -291,7 +297,9 @@
 				40D8182A2AA91368002C586B /* assisdanceApp.swift in Sources */,
 				40A81EF62ACDE8B000B7C7CF /* SetModel.swift in Sources */,
 				40A81EE02ACD610B00B7C7CF /* LoginResponse.swift in Sources */,
+				40C33CD42B05F3BD002B7459 /* DancerModel.swift in Sources */,
 				40A81F022ACE990000B7C7CF /* FormationView.swift in Sources */,
+				40C33CD22B0591D4002B7459 /* SingleFormationView.swift in Sources */,
 				40A81EF12ACDC8F600B7C7CF /* FormationBookModel.swift in Sources */,
 				40A81EE52ACD670200B7C7CF /* helpers.swift in Sources */,
 				40A81EFA2ACDED3E00B7C7CF /* FormationBookViewModel.swift in Sources */,
