@@ -11,6 +11,8 @@ struct SetView: View {
     
     @EnvironmentObject var formationBook: FormationBookViewModel
     @State var set: SetModel
+    @State private var pageIndex = 0
+    private let dotAppearance = UIPageControl.appearance()
     
     var body: some View {
         GeometryReader{ geometry in
@@ -25,14 +27,28 @@ struct SetView: View {
                 }
                 .padding(.top, 50)
                 Spacer()
-                ScrollView(.horizontal) {
-                    HStack(spacing: 20) {
-                        ForEach(set.formations) { formation in
+                
+                TabView(selection: $pageIndex) {
+                    ForEach(set.formations) { formation in
+                        HStack() {
+                            if formation == set.formations.first {
+                            } else {
+                                Button("<", action: decrementPage)
+                            }
+                            Spacer()
                             FormationView(formation: formation)
                                 .frame(height: geometry.size.height*0.5)
+                            Spacer()
+                            if formation == set.formations.last {
+                            } else {
+                                Button(">", action: incrementPage)
+                            }
                         }
+                        .tag(formation.tag)
                     }
                 }
+                
+                
                 Spacer()
                 Button("Add Formation") {
                     let lastFormation = set.formations.last!
@@ -40,13 +56,14 @@ struct SetView: View {
                     for d in lastFormation.dancers {
                         newDancers.append(DancerModel(id: d.id, position: [d.position[0], d.position[1]]))
                     }
-                    let newFormation = FormationModel(name: "formation \(set.formations.count + 1)", dancers: newDancers)
+                    let newFormation = FormationModel(name: "formation \(set.formations.count + 1)", dancers: newDancers, tag: set.formations.count)
                     set.addFormation(newFormation)
                     formationBook.saveSets()
                     print(set)
                     for s in formationBook.sets {
                         print(s)
                     }
+                    incrementPage()
                 }
                 .buttonStyle(.borderedProminent)
                 Spacer()
@@ -62,6 +79,18 @@ struct SetView: View {
             }
         }
     }
+    
+    func decrementPage() {
+        pageIndex -= 1
+    }
+    
+    func incrementPage() {
+        pageIndex += 1
+    }
+    
+    func goToPage(page: Int) {
+        pageIndex = page
+    }
 }
 
 
@@ -70,8 +99,8 @@ struct SetView_Previews_wrapper : View {
         var curr_set = SetModel(name: "set", numDancers: 5)
         let dancer1 = DancerModel(position: [25.0, 25.0])
         let dancer2 = DancerModel(position: [50.0, 50.0])
-        let formation1 = FormationModel(name: "formation 1", dancers: [dancer1, dancer2])
-        let formation2 = FormationModel(name: "formation 2", dancers: [dancer1, dancer2])
+        let formation1 = FormationModel(name: "formation 1", dancers: [dancer1, dancer2], tag: 0)
+        let formation2 = FormationModel(name: "formation 2", dancers: [dancer1, dancer2], tag: 1)
         curr_set.addFormation(formation1)
         curr_set.addFormation(formation2)
         return curr_set
