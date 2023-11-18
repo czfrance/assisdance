@@ -14,10 +14,10 @@ struct HomeFormationCard: View {
     
     var body: some View {
         HStack {
-            set.image
-                .resizable()
-                .frame(width: 100, height: 100)
-                .padding(.leading, 25)
+//            set.image
+//                .resizable()
+//                .frame(width: 100, height: 100)
+//                .padding(.leading, 25)
             Text(set.name)
                 .font(.system(size: 28))
             Spacer()
