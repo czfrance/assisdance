@@ -19,8 +19,16 @@ class FormationBookViewModel: NSObject, ObservableObject {
         formationBookModel.addSet(set)
     }
     
+    func deletSet(_ set: SetModel) {
+        _ = formationBookModel.deleteSet(id: set.id)
+    }
+    
     func loadSets() {
-        formationBookModel.loadSets()
+        _ = formationBookModel.loadSets()
+    }
+    
+    func saveSets() {
+        _ = formationBookModel.save()
     }
     
     func createNewSet(name: String, numDancers: Int) -> SetModel {
