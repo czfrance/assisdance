@@ -21,9 +21,9 @@ class SetViewModel: NSObject, ObservableObject {
         return setModel.name
     }
     
-    var image: Image {
-        return Image(setModel.imageName)
-    }
+//    var image: Image {
+//        return Image(setModel.imageName)
+//    }
 
     var formations: [FormationModel] {
         return setModel.formations
