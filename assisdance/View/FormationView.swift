@@ -23,6 +23,7 @@ struct FormationView: View {
                 }
                 .padding(.top, 25)
                 SingleFormationView(formation: formation)
+                    .frame(width: geometry.size.width, height: geometry.size.width * 0.6)
             }
         }
         .cornerRadius(20)
@@ -33,8 +34,8 @@ struct FormationView: View {
 
 struct FormationView_Previews: PreviewProvider {
     static var previews: some View {
-        let dancer1 = DancerModel(position: [25.0, 25.0])
-        let dancer2 = DancerModel(position: [50.0, 50.0])
+        let dancer1 = DancerModel(number: 1, position: [25.0, 25.0])
+        let dancer2 = DancerModel(number: 2, position: [50.0, 50.0])
         let formation = FormationModel(name: "Formation 1", dancers: [dancer1, dancer2], tag: 0)
         FormationView(formation: formation)
     }
