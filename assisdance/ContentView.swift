@@ -15,14 +15,12 @@ struct ContentView: View {
         }
         .padding()
         
-//        DrawingView()
+        
         
 //        VStack {
 //            DrawingView()
-//            ZStack {
-//                DancerIcon(posx: 0.0, posy: 0.0)
-//                DancerIcon(posx: 100.0, posy: 100.0)
-//            }
+//            Spacer()
+//            TestAnimationByPath()
 //        }
     }
 }

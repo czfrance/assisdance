@@ -32,6 +32,8 @@
 		40A81F042ACEA26800B7C7CF /* NewSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A81F032ACEA26800B7C7CF /* NewSetView.swift */; };
 		40C33CD22B0591D4002B7459 /* SingleFormationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C33CD12B0591D4002B7459 /* SingleFormationView.swift */; };
 		40C33CD42B05F3BD002B7459 /* DancerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C33CD32B05F3BC002B7459 /* DancerModel.swift */; };
+		40CC2FC72B09D7F30074EA85 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CC2FC62B09D7F30074EA85 /* test.swift */; };
+		40CC2FCB2B0BBB1A0074EA85 /* DrawPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CC2FCA2B0BBB1A0074EA85 /* DrawPathView.swift */; };
 		40D8182A2AA91368002C586B /* assisdanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D818292AA91368002C586B /* assisdanceApp.swift */; };
 		40D8182C2AA91368002C586B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8182B2AA91368002C586B /* ContentView.swift */; };
 		40D8182E2AA9136A002C586B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40D8182D2AA9136A002C586B /* Assets.xcassets */; };
@@ -65,6 +67,8 @@
 		40A81F032ACEA26800B7C7CF /* NewSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSetView.swift; sourceTree = "<group>"; };
 		40C33CD12B0591D4002B7459 /* SingleFormationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleFormationView.swift; sourceTree = "<group>"; };
 		40C33CD32B05F3BC002B7459 /* DancerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DancerModel.swift; sourceTree = "<group>"; };
+		40CC2FC62B09D7F30074EA85 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		40CC2FCA2B0BBB1A0074EA85 /* DrawPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPathView.swift; sourceTree = "<group>"; };
 		40D818262AA91368002C586B /* assisdance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = assisdance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D818292AA91368002C586B /* assisdanceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = assisdanceApp.swift; sourceTree = "<group>"; };
 		40D8182B2AA91368002C586B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 				408522402AF236B8005BAAAE /* DrawingView.swift */,
 				408522422AF38BA6005BAAAE /* DancerIcon.swift */,
 				40C33CD12B0591D4002B7459 /* SingleFormationView.swift */,
+				40CC2FCA2B0BBB1A0074EA85 /* DrawPathView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 				40D8182B2AA91368002C586B /* ContentView.swift */,
 				40D8182D2AA9136A002C586B /* Assets.xcassets */,
 				40D8182F2AA9136A002C586B /* Preview Content */,
+				40CC2FC62B09D7F30074EA85 /* test.swift */,
 			);
 			path = assisdance;
 			sourceTree = "<group>";
@@ -301,10 +307,12 @@
 				40A81F022ACE990000B7C7CF /* FormationView.swift in Sources */,
 				40C33CD22B0591D4002B7459 /* SingleFormationView.swift in Sources */,
 				40A81EF12ACDC8F600B7C7CF /* FormationBookModel.swift in Sources */,
+				40CC2FC72B09D7F30074EA85 /* test.swift in Sources */,
 				40A81EE52ACD670200B7C7CF /* helpers.swift in Sources */,
 				40A81EFA2ACDED3E00B7C7CF /* FormationBookViewModel.swift in Sources */,
 				40A81EEB2ACD6A2500B7C7CF /* Auth.swift in Sources */,
 				40A81EF32ACDCFEB00B7C7CF /* FormationModel.swift in Sources */,
+				40CC2FCB2B0BBB1A0074EA85 /* DrawPathView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
