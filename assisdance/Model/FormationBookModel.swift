@@ -94,7 +94,7 @@ struct FormationBookModel {
         var newSet = SetModel(name: name, numDancers: numDancers)
         var dancers: [DancerModel] = []
         for i in 1...numDancers {
-            let newDancer = DancerModel(number: i, position: [10.0*Double(i), 100.0])
+            let newDancer = DancerModel(number: i, position: [15.0*Double(i), 100.0])
             dancers.append(newDancer)
         }
         let firstFormation = FormationModel(name: "formation 1", dancers: dancers, tag: 0)
