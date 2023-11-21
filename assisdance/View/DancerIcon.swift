@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-var circleSize: CGFloat = 50
-var outlineSize: CGFloat = 65
+//var circleSize: CGFloat = 50
+//var outlineSize: CGFloat = circleSize*1.3
 
 struct DancerIcon: Shape {
     @EnvironmentObject var formationBook: FormationBookViewModel
@@ -17,6 +17,7 @@ struct DancerIcon: Shape {
     @State var posy: CGFloat
     @State var isDragging = false
     @State var move = false
+    var circleSize: CGFloat
     
 //    init(dId: UUID, posx: CGFloat, posy: CGFloat) {
 //        self.posx = posx
@@ -44,7 +45,7 @@ struct DancerIcon: Shape {
     var body: some View {
         Circle()
             .fill(Color.gray)
-            .frame(width: isDragging == true ? outlineSize*1.1 : outlineSize, height: isDragging == true ? outlineSize*1.1 : outlineSize)
+            .frame(width: isDragging == true ? circleSize*1.3*1.1 : circleSize*1.3, height: isDragging == true ? circleSize*1.3*1.1 : circleSize*1.3)
             .position(x: self.posx, y: self.posy)
             .offset(dragAmount)
             .zIndex(isDragging == false ? 0 : 1)
@@ -83,14 +84,29 @@ struct DancerIcon: Shape {
                         update_pos()
                     }
             )
+        Text(dancer.name == "" ? String(dancer.number) : dancer.name)
+            .position(x: self.posx, y: self.posy)
+            .offset(dragAmount)
+            .zIndex(isDragging == false ? 0 : 1)
+            .gesture(
+                DragGesture(coordinateSpace: .global)
+                    .onChanged {
+                        self.isDragging = true
+                        self.dragAmount = CGSize(width: $0.translation.width, height: $0.translation.height)
+                    }
+                    .onEnded {_ in
+                        self.isDragging = false
+                        update_pos()
+                    }
+            )
         
     }
 }
 
 struct DancerIcon_Previews: PreviewProvider {
     static var previews: some View {
-        let dancer = DancerModel(position: [50.0, 50.0])
+        let dancer = DancerModel(number: 1, position: [50.0, 50.0])
         let formation = FormationModel(name: "formation", dancers: [], tag: 0)
-        DancerIcon(formation: formation, dancer: dancer, posx: 100.0, posy: 100.0)
+        DancerIcon(formation: formation, dancer: dancer, posx: 100.0, posy: 100.0, circleSize: 50)
     }
 }

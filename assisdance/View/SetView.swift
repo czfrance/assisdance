@@ -54,7 +54,7 @@ struct SetView: View {
                     let lastFormation = set.formations.last!
                     var newDancers: [DancerModel] = []
                     for d in lastFormation.dancers {
-                        newDancers.append(DancerModel(id: d.id, position: [d.position[0], d.position[1]]))
+                        newDancers.append(DancerModel(id: d.id, number: d.number, position: [d.position[0], d.position[1]]))
                     }
                     let newFormation = FormationModel(name: "formation \(set.formations.count + 1)", dancers: newDancers, tag: set.formations.count)
                     set.addFormation(newFormation)
@@ -97,8 +97,8 @@ struct SetView: View {
 struct SetView_Previews_wrapper : View {
     func preview() -> SetModel {
         var curr_set = SetModel(name: "set", numDancers: 5)
-        let dancer1 = DancerModel(position: [25.0, 25.0])
-        let dancer2 = DancerModel(position: [50.0, 50.0])
+        let dancer1 = DancerModel(number: 1, position: [25.0, 25.0])
+        let dancer2 = DancerModel(number: 2, position: [50.0, 50.0])
         let formation1 = FormationModel(name: "formation 1", dancers: [dancer1, dancer2], tag: 0)
         let formation2 = FormationModel(name: "formation 2", dancers: [dancer1, dancer2], tag: 1)
         curr_set.addFormation(formation1)
