@@ -28,6 +28,7 @@ struct HomeScreen: View {
                     }
                 }
                 .navigationTitle("Your Sets")
+                .navigationBarTitleDisplayMode(.inline)
                 
                 Button {
                     newSet.toggle()
@@ -44,19 +45,19 @@ struct HomeScreen: View {
                     NewSetView()
                         .environmentObject(formationBook)
                 }
+                
+                Button(
+                    action: viewModel.logout,
+                    label: {
+                        Text("Home.LogoutButton.Title".localized)
+                            .font(.system(size: 24, weight: .bold, design: .default))
+                            .frame(maxWidth: .infinity, maxHeight: 60)
+                            .foregroundColor(Color.white)
+                            .background(Color.red)
+                            .cornerRadius(10)
+                    }
+                )
             }
-        
-            Button(
-                action: viewModel.logout,
-                label: {
-                    Text("Home.LogoutButton.Title".localized)
-                        .font(.system(size: 24, weight: .bold, design: .default))
-                        .frame(maxWidth: .infinity, maxHeight: 60)
-                        .foregroundColor(Color.white)
-                        .background(Color.red)
-                        .cornerRadius(10)
-                }
-            )
         }
         .padding(30)
     }

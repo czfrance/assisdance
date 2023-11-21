@@ -25,29 +25,48 @@ struct SetView: View {
                     }
                     Spacer()
                 }
-                .padding(.top, 50)
+//                .padding(.top, 50)
                 Spacer()
                 
                 TabView(selection: $pageIndex) {
                     ForEach(set.formations) { formation in
                         HStack() {
+                            Spacer()
                             if formation == set.formations.first {
+                                Button {} label: {
+                                    Image(systemName: "arrow.left")
+                                        .foregroundColor(.gray)
+                                }
                             } else {
-                                Button("<", action: decrementPage)
+                                Button {
+                                    decrementPage()
+                                } label: {
+                                    Image(systemName: "arrow.left")
+                                }
                             }
                             Spacer()
                             FormationView(formation: formation)
-                                .frame(height: geometry.size.height*0.5)
+                                .aspectRatio(contentMode: .fit)
                             Spacer()
                             if formation == set.formations.last {
+                                Button {} label: {
+                                    Image(systemName: "arrow.right")
+                                        .foregroundColor(.gray)
+                                }
                             } else {
-                                Button(">", action: incrementPage)
+                                Button {
+                                    incrementPage()
+                                } label: {
+                                    Image(systemName: "arrow.right")
+                                }
                             }
+                            Spacer()
                         }
                         .tag(formation.tag)
                     }
                 }
-                
+                .ignoresSafeArea()
+//                .frame(width: geometry.size.width, height: geometry.size.width > geometry.size.height ? geometry.size.height : geometry.size.width * 0.75)
                 
                 Spacer()
                 Button("Add Formation") {
@@ -114,6 +133,6 @@ struct SetView_Previews_wrapper : View {
 struct SetView_Previews: PreviewProvider {
     static var previews: some View {
         SetView_Previews_wrapper()
-            .previewInterfaceOrientation(.landscapeLeft)
+//            .previewInterfaceOrientation(.landscapeLeft)
     }
 }

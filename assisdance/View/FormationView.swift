@@ -23,11 +23,12 @@ struct FormationView: View {
                 }
                 .padding(.top, 25)
                 SingleFormationView(formation: formation)
-                    .frame(width: geometry.size.width, height: geometry.size.width * 0.6)
+                    .frame(width: geometry.size.width > geometry.size.height ? geometry.size.height*(4/3) : geometry.size.width, height: geometry.size.width > geometry.size.height ? geometry.size.height : geometry.size.width * 0.75)
             }
         }
         .cornerRadius(20)
         .scaledToFit()
+//        .scaledToFill()
         .shadow(radius: 5, x: 0, y: 5)
     }
 }
@@ -38,5 +39,6 @@ struct FormationView_Previews: PreviewProvider {
         let dancer2 = DancerModel(number: 2, position: [50.0, 50.0])
         let formation = FormationModel(name: "Formation 1", dancers: [dancer1, dancer2], tag: 0)
         FormationView(formation: formation)
+//            .previewInterfaceOrientation(.landscapeLeft)
     }
 }

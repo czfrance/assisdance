@@ -18,7 +18,7 @@ struct SingleFormationView: View {
                     DancerIcon(formation: formation, dancer: dancer, posx: dancer.position[0], posy: dancer.position[1], circleSize: geometry.size.width*0.05)
                 }
             }
-//            .frame(width: geometry.size.width, height: geometry.size.width*0.5)
+            .frame(width: geometry.size.width > geometry.size.height ? geometry.size.height*(4/3) : geometry.size.width, height: geometry.size.width > geometry.size.height ? geometry.size.height : geometry.size.width * 0.75)
         }
         .cornerRadius(20)
 //        .scaledToFit()
@@ -33,5 +33,6 @@ struct SingleFormationView_Previews: PreviewProvider {
         let dancer2 = DancerModel(number: 2, position: [50.0, 50.0])
         let formation = FormationModel(name: "Formation 1", dancers: [dancer1, dancer2], tag: 0)
         SingleFormationView(formation: formation)
+//            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
