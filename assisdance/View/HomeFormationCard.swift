@@ -22,6 +22,16 @@ struct HomeFormationCard: View {
                 .font(.system(size: 28))
             Spacer()
         }
+        .shadow(radius: 5, x: 0, y: 5)
+        .swipeActions {
+            Button(role: .destructive){
+                formationBook.deletSet(set)
+                formationBook.saveSets()
+            } label:{
+                Label("", systemImage: "trash")
+            }
+            .tint(.red)
+        }
     }
 }
 
