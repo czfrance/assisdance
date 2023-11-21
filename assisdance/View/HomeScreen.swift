@@ -15,11 +15,11 @@ struct HomeScreen: View {
     
     var body: some View {
         VStack {
-            Spacer()
-            Text("Home.Title".localized)
-                .font(.system(size: 24, weight: .bold, design: .default))
-
             NavigationStack {
+                Spacer()
+                Text("Home.Title".localized)
+                    .font(.system(size: 24, weight: .bold, design: .default))
+                Spacer()
                 List(formationBook.sets) { danceSet in
                     NavigationLink {
                         SetView(set: danceSet)
