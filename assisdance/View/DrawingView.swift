@@ -59,8 +59,10 @@ struct DrawingView: View {
 //                    .frame(width:200, height:200)
 //                    .position(x: 100, y: 0)
                 DrawView(canvas: $canvas, button_enabled: $button_enabled)
+                    .border(.red, width: 5)
             }
         }
+            .border(.blue, width: 4)
     }
 }
 
@@ -109,11 +111,20 @@ extension Coordinator: PKCanvasViewDelegate {
       //get the points of the line drawn
       for stroke in strokes {
           let points = stroke.path.interpolatedPoints(by: .distance(3))
-//          print(points.count)
-//          for point in points {
-//              print(point.location)
-//          }
+
+          var path = Path()
+          let pathPoints = points.map { CGPoint(x: $0.location.x, y: $0.location.y) }
+          path.addLines(pathPoints)
+          
+          for point in points {
+              print(point.location)
+          }
           print("-----done-----")
+          
+//          PathAnimatingView(path: path) {
+//              Circle()
+//                  .fill(Color.gray)
+//          }
       }
       
       //only allow user to draw one line
