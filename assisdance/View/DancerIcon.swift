@@ -13,11 +13,18 @@ struct DancerIcon: Shape {
     @EnvironmentObject var formationBook: FormationBookViewModel
     @State var formation: FormationModel
     @State var dancer: DancerModel
-    @State var posx: CGFloat
-    @State var posy: CGFloat
+    @State var posx: CGFloat //this is already multiplied by width
+    @State var posy: CGFloat //this is already multiplied by height
     @State var isDragging = false
     @State var move = false
+    @Binding var screenWidth: CGFloat
+    @Binding var screenHeight: CGFloat
     var circleSize: CGFloat
+    @State var orientation = UIDevice.current.orientation
+    
+    let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
+            .makeConnectable()
+            .autoconnect()
     
 //    init(dId: UUID, posx: CGFloat, posy: CGFloat) {
 //        self.posx = posx
@@ -31,10 +38,11 @@ struct DancerIcon: Shape {
     @State var dragAmount = CGSize.zero
     
     func update_pos() {
-        posx += self.dragAmount.width
-        posy += self.dragAmount.height
+        posx += self.dragAmount.width / screenWidth
+        posy += self.dragAmount.height / screenHeight
         _ = self.position(x: posx, y: posy)
         self.dragAmount = CGSize.zero
+        print("dimenstions: (\(screenWidth), \(screenHeight))")
         print("(x: \(posx), y: \(posy))")
         dancer.updatePosition(x: posx, y: posy)
         print(formation)
@@ -46,7 +54,7 @@ struct DancerIcon: Shape {
         Circle()
             .fill(Color.gray)
             .frame(width: isDragging == true ? circleSize*1.3*1.1 : circleSize*1.3, height: isDragging == true ? circleSize*1.3*1.1 : circleSize*1.3)
-            .position(x: self.posx, y: self.posy)
+            .position(x: self.posx*screenWidth, y: self.posy*screenHeight)
             .offset(dragAmount)
             .zIndex(isDragging == false ? 0 : 1)
             .gesture(
@@ -61,6 +69,10 @@ struct DancerIcon: Shape {
                     }
             )
             .animation(Animation.timingCurve(0.2, 0.8, 0.2, 1, duration: 5.0), value: move)
+            .onReceive(orientationChanged) { _ in
+                self.orientation = UIDevice.current.orientation
+                _ = self.position(x: posx*screenWidth, y: posy*screenHeight)
+            }
 //            .onTapGesture{
 //                posx += 300
 //                posy += 300
@@ -70,7 +82,7 @@ struct DancerIcon: Shape {
         Circle()
             .fill(Color.mint)
             .frame(width: isDragging == true ? circleSize*1.1 : circleSize, height: isDragging == true ? circleSize*1.1 : circleSize)
-            .position(x: self.posx, y: self.posy)
+            .position(x: self.posx*screenWidth, y: self.posy*screenHeight)
             .offset(dragAmount)
             .zIndex(isDragging == false ? 0 : 1)
             .gesture(
@@ -85,7 +97,7 @@ struct DancerIcon: Shape {
                     }
             )
         Text(dancer.name == "" ? String(dancer.number) : dancer.name)
-            .position(x: self.posx, y: self.posy)
+            .position(x: self.posx*screenWidth, y: self.posy*screenHeight)
             .offset(dragAmount)
             .zIndex(isDragging == false ? 0 : 1)
             .gesture(
@@ -99,7 +111,6 @@ struct DancerIcon: Shape {
                         update_pos()
                     }
             )
-        
     }
 }
 
@@ -107,6 +118,6 @@ struct DancerIcon_Previews: PreviewProvider {
     static var previews: some View {
         let dancer = DancerModel(number: 1, position: [50.0, 50.0])
         let formation = FormationModel(name: "formation", dancers: [], tag: 0)
-        DancerIcon(formation: formation, dancer: dancer, posx: 100.0, posy: 100.0, circleSize: 50)
+        DancerIcon(formation: formation, dancer: dancer, posx: 100.0, posy: 100.0, screenWidth: .constant(800.0), screenHeight: .constant(600.0), circleSize: 50)
     }
 }
