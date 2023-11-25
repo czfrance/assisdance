@@ -27,8 +27,12 @@ struct SingleFormationView: View {
             }
             .frame(width: geometry.size.width > geometry.size.height ? geometry.size.height*(4/3) : geometry.size.width, height: geometry.size.width > geometry.size.height ? geometry.size.height : geometry.size.width * 0.75)
             .onAppear {
-                self.screenWidth = geometry.size.width
-                self.screenHeight = geometry.size.height
+                Task { @MainActor in
+                    try await Task.sleep(for: .seconds(0.1))
+                    self.screenWidth = geometry.size.width
+                    self.screenHeight = geometry.size.height
+//                    print("\(screenWidth), \(screenHeight)")
+                }
             }
             .onReceive(orientationChanged) { _ in
                 Task { @MainActor in
@@ -36,6 +40,7 @@ struct SingleFormationView: View {
                     self.orientation = UIDevice.current.orientation
                     self.screenWidth = geometry.size.width
                     self.screenHeight = geometry.size.height
+//                    print("\(screenWidth), \(screenHeight)")
                 }
             }
         }
@@ -44,13 +49,6 @@ struct SingleFormationView: View {
         .shadow(radius: 5, x: 0, y: 5)
         .border(.green, width: 10)
     }
-    
-//    func setBounds(width: CGFloat, height: CGFloat) -> Bool {
-//        self.screenWidth = width
-//        self.screenHeight = height
-//
-//        return true
-//    }
 }
 
 struct SingleFormationView_Previews: PreviewProvider {
