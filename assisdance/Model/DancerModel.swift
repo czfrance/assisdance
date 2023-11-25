@@ -10,18 +10,25 @@ import Foundation
 class DancerModel: Identifiable, Codable {
     let id: UUID
     var number: Int
-    var name: String = ""
+    var name: String
     var position: [Double]
     var path: [Double]
     
-    init(id: UUID = UUID(), number: Int, position: [Double], path: [Double] = []) {
+    init(id: UUID = UUID(), number: Int, name: String = "", position: [Double], path: [Double] = []) {
         self.id = id
         self.number = number
+        self.name = name
         self.position = position
         self.path = path
     }
     
+    
     func updatePosition(x: Double, y: Double) {
         self.position = [x, y]
+    }
+    
+    
+    func updatePath(newPath: [Double]) {
+        self.path = newPath
     }
 }

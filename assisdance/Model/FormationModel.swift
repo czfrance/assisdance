@@ -25,24 +25,30 @@ struct FormationModel: Identifiable, Codable, Equatable {
         self.tag = tag
     }
     
-//    mutating func updateDancer(dId: UUID, x: Double, y: Double) {
-//        if dancers.keys.contains(dId) {
-//            let dancer = dancers[dId]
-//            let newDancer = DancerModel(id: dancer!.id, position: (x, y), path: dancer!.path)
-//            dancers[dId] = newDancer
-//        }
-//        else {
-//            print("dancer doesnt exist")
-//            return
-//        }
-//    }
+    
+    func getDancer(dId: UUID) -> DancerModel? {
+        for d in dancers {
+            if d.id == dId {
+               return d
+            }
+        }
+        return nil
+    }
+    
     
     mutating func updateDancer(dId: UUID, x: Double, y: Double) {
         for d in dancers {
             if d.id == dId {
                 d.updatePosition(x: x, y: y)
-//                let newDancer = DancerModel(id: d.id, position: [x, y], path: d.path)
-//                dancers[i] = newDancer
+            }
+        }
+    }
+    
+    
+    mutating func updateDancerPath(dId: UUID, path: [Double]) {
+        for d in dancers {
+            if d.id == dId {
+                d.updatePath(newPath: path)
             }
         }
     }
