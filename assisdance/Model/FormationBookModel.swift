@@ -90,11 +90,11 @@ struct FormationBookModel {
         else { return false }
     }
     
-    mutating func createNewSet(name: String, numDancers: Int) -> SetModel {
+    mutating func createNewSet(name: String, numDancers: Int, width: Double, height: Double) -> SetModel {
         var newSet = SetModel(name: name, numDancers: numDancers)
         var dancers: [DancerModel] = []
         for i in 1...numDancers {
-            let newDancer = DancerModel(number: i, position: [15.0*Double(i), 100.0])
+            let newDancer = DancerModel(number: i, position: [(1 / Double(numDancers))*(Double(i)/2), 0.5])
             dancers.append(newDancer)
         }
         let firstFormation = FormationModel(name: "formation 1", dancers: dancers, tag: 0)
