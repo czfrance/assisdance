@@ -45,7 +45,7 @@ struct SetView: View {
                                 }
                             }
                             Spacer()
-                            FormationView(formation: formation)
+                            FormationView(set: set, formation: formation)
                                 .aspectRatio(contentMode: .fit)
                             Spacer()
                             if formation == set.formations.last {
