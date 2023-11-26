@@ -45,7 +45,7 @@ struct FormationModel: Identifiable, Codable, Equatable {
     }
     
     
-    mutating func updateDancerPath(dId: UUID, path: [Double]) {
+    mutating func updateDancerPath(dId: UUID, path: [[CGFloat]]) {
         for d in dancers {
             if d.id == dId {
                 d.updatePath(newPath: path)

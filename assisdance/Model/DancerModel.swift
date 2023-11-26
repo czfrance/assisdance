@@ -12,9 +12,9 @@ class DancerModel: Identifiable, Codable {
     var number: Int
     var name: String
     var position: [Double]
-    var path: [Double]
+    var path: [[CGFloat]]
     
-    init(id: UUID = UUID(), number: Int, name: String = "", position: [Double], path: [Double] = []) {
+    init(id: UUID = UUID(), number: Int, name: String = "", position: [Double], path: [[CGFloat]] = []) {
         self.id = id
         self.number = number
         self.name = name
@@ -28,7 +28,7 @@ class DancerModel: Identifiable, Codable {
     }
     
     
-    func updatePath(newPath: [Double]) {
+    func updatePath(newPath: [[CGFloat]]) {
         self.path = newPath
     }
 }
