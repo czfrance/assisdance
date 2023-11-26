@@ -12,6 +12,7 @@ struct DrawingView: View {
     @Environment(\.undoManager) var undoManager
     @State var canvas = PKCanvasView()
     @State var button_enabled: Bool = false
+    @State var pathDrawn: [[CGFloat]] = []
 
     
     var body: some View {
@@ -58,7 +59,7 @@ struct DrawingView: View {
 //                    .fill(.red)
 //                    .frame(width:200, height:200)
 //                    .position(x: 100, y: 0)
-                DrawView(canvas: $canvas, button_enabled: $button_enabled)
+                DrawView(canvas: $canvas, button_enabled: $button_enabled, pathDrawn: $pathDrawn)
                     .border(.red, width: 5)
             }
         }
@@ -69,6 +70,7 @@ struct DrawingView: View {
 struct DrawView: UIViewRepresentable {
     @Binding var canvas: PKCanvasView
     @Binding var button_enabled: Bool
+    @Binding var pathDrawn: [[CGFloat]]
 
     let ink = PKInkingTool(.pen, color: .black, width: 10)
     
@@ -87,7 +89,7 @@ struct DrawView: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-      Coordinator(canvasView: $canvas, button_enabled: $button_enabled)
+        Coordinator(canvasView: $canvas, button_enabled: $button_enabled, pathDrawn: $pathDrawn)
     }
     
 }
@@ -95,50 +97,48 @@ struct DrawView: UIViewRepresentable {
 class Coordinator: NSObject {
     var canvasView: Binding<PKCanvasView>
     @Binding var button_enabled: Bool
+    @Binding var pathDrawn: [[CGFloat]]
 
-    init(canvasView: Binding<PKCanvasView>, button_enabled: Binding<Bool>) {
+    init(canvasView: Binding<PKCanvasView>, button_enabled: Binding<Bool>, pathDrawn: Binding<[[CGFloat]]>) {
         self.canvasView = canvasView
         self._button_enabled = button_enabled
+        self._pathDrawn = pathDrawn
     }
 }
 
 extension Coordinator: PKCanvasViewDelegate {
     //when the drawing changes
-  func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
+    func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
       
-      let strokes = canvasView.drawing.strokes
-      print(strokes.count)
-      //get the points of the line drawn
-      for stroke in strokes {
-          let points = stroke.path.interpolatedPoints(by: .distance(3))
-
-          var path = Path()
-          let pathPoints = points.map { CGPoint(x: $0.location.x, y: $0.location.y) }
-          path.addLines(pathPoints)
+        let strokes = canvasView.drawing.strokes
+        print(strokes.count)
+        //get the points of the line drawn
+        for stroke in strokes {
+            let points = stroke.path.interpolatedPoints(by: .distance(3))
+            
+            let pathPoints = points.map { [$0.location.x, $0.location.y] }
+            
+            pathDrawn = pathPoints
+            print("-----done-----")
           
-          for point in points {
-              print(point.location)
-          }
-          print("-----done-----")
-          
-//          PathAnimatingView(path: path) {
-//              Circle()
-//                  .fill(Color.gray)
-//          }
-      }
+    //          PathAnimatingView(path: path) {
+    //              Circle()
+    //                  .fill(Color.gray)
+    //          }
+        }
       
-      //only allow user to draw one line
-      if (strokes.count > 0) {
-          print("no more drawing")
-          canvasView.drawingGestureRecognizer.isEnabled = false
-          button_enabled = true
-      }
-      else {
-          print("drawing allowed")
-          canvasView.drawingGestureRecognizer.isEnabled = true
-          button_enabled = false
-      }
-  }
+        //only allow user to draw one line
+        if (strokes.count > 0) {
+            print("no more drawing")
+            canvasView.drawingGestureRecognizer.isEnabled = false
+            button_enabled = true
+        }
+        else {
+            print("drawing allowed")
+            canvasView.drawingGestureRecognizer.isEnabled = true
+            button_enabled = false
+        }
+    }
 }
 
 struct DrawingView_Previews: PreviewProvider {

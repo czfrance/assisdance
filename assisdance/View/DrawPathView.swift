@@ -11,10 +11,13 @@ import PencilKit
 struct DrawPathView: View {
     @EnvironmentObject var formationBook: FormationBookViewModel
     @State var formation1: FormationModel
-    @State var formation2: FormationModel
+    @State var formation2: FormationModel?
+    @State var selectedDancer: UUID
     @Environment(\.undoManager) var undoManager
     @State var canvas = PKCanvasView()
     @State var button_enabled: Bool = false
+    @State var pathDrawn: [[CGFloat]] = []
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         GeometryReader { geometry in
@@ -22,15 +25,17 @@ struct DrawPathView: View {
             VStack(spacing: 10) {
                 HStack {
                     Spacer()
-                    Text(formation1.name).font(.system(size: 24, weight: .bold, design: .default))
+                    Text("Transition for Dancer \(formation1.getDancer(dId: selectedDancer)!.name == "" ? String(formation1.getDancer(dId: selectedDancer)!.number) : formation1.getDancer(dId: selectedDancer)!.name) from \(formation1.name) to \(formation2 != nil ? formation2!.name : "next formation")").font(.system(size: 24, weight: .bold, design: .default))
                     Spacer()
                 }
                 .padding(.top, 25)
                 ZStack {
                     SingleFormationView(formation: formation1)
-                    SingleFormationView(formation: formation2)
-                        .opacity(0.25)
-                    DrawView(canvas: $canvas, button_enabled: $button_enabled)
+                    if formation2 != nil {
+                        SingleFormationView(formation: formation2!)
+                            .opacity(0.25)
+                    }
+                    DrawView(canvas: $canvas, button_enabled: $button_enabled, pathDrawn: $pathDrawn)
                         .border(.red, width: 5)
                 }
                 Button(
@@ -49,7 +54,13 @@ struct DrawPathView: View {
                 )
                 .disabled(!button_enabled)
                 Button(
-                    action: {print("confirm")},
+                    action: {
+                        print("confirm")
+                        print(pathDrawn)
+                        formation1.updateDancerPath(dId: selectedDancer, path: pathDrawn)
+//                        formation1.updateDancerPath(dId: selectedDancer, path: pathDrawn.map { $0.map{ Double($0) } })
+                        presentationMode.wrappedValue.dismiss()
+                    },
                     label: {
                         Text("Confirm Path")
                             .font(.system(size: 24, weight: .bold, design: .default))
@@ -70,12 +81,12 @@ struct DrawPathView: View {
 
 struct DrawPathView_Previews: PreviewProvider {
     static var previews: some View {
-        let dancer1 = DancerModel(number: 1, position: [25.0, 25.0])
-        let dancer2 = DancerModel(number: 2, position: [50.0, 50.0])
+        let dancer1 = DancerModel(number: 1, position: [0.5, 0.5])
+        let dancer2 = DancerModel(number: 2, position: [0.75, 0.75])
         let formation = FormationModel(name: "Formation 1", dancers: [dancer1, dancer2], tag: 0)
-        let dancer3 = DancerModel(number: 1, position: [200.0, 200.0])
-        let dancer4 = DancerModel(number: 2, position: [300.0, 300.0])
+        let dancer3 = DancerModel(number: 1, position: [0.25, 0.25])
+        let dancer4 = DancerModel(number: 2, position: [0.6, 0.6])
         let formation2 = FormationModel(name: "Formation 2", dancers: [dancer3, dancer4], tag: 1)
-        DrawPathView(formation1: formation, formation2: formation2)
+        DrawPathView(formation1: formation, formation2: formation2, selectedDancer: dancer1.id)
     }
 }
