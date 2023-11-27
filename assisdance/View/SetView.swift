@@ -11,7 +11,7 @@ struct SetView: View {
     
     @EnvironmentObject var formationBook: FormationBookViewModel
     @State var set: SetModel
-    @State private var pageIndex = 0
+    @State var pageIndex = 0
     private let dotAppearance = UIPageControl.appearance()
     
     var body: some View {
@@ -25,10 +25,9 @@ struct SetView: View {
                     }
                     Spacer()
                 }
-//                .padding(.top, 50)
                 Spacer()
                 
-                TabView(selection: $pageIndex) {
+                ZStack {
                     ForEach(set.formations) { formation in
                         HStack() {
                             Spacer()
@@ -45,7 +44,7 @@ struct SetView: View {
                                 }
                             }
                             Spacer()
-                            FormationView(set: set, formation: formation)
+                            FormationView(set: set, formation: formation, pageIndex: $pageIndex)
                                 .aspectRatio(contentMode: .fit)
                             Spacer()
                             if formation == set.formations.last {
@@ -63,10 +62,10 @@ struct SetView: View {
                             Spacer()
                         }
                         .tag(formation.tag)
+                        .opacity(pageIndex == formation.tag ? 1 : 0)
                     }
                 }
                 .ignoresSafeArea()
-//                .frame(width: geometry.size.width, height: geometry.size.width > geometry.size.height ? geometry.size.height : geometry.size.width * 0.75)
                 
                 Spacer()
                 Button("Add Formation") {
