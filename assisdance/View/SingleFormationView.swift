@@ -13,6 +13,7 @@ struct SingleFormationView: View {
     @State var orientation = UIDevice.current.orientation
     @State var screenWidth: CGFloat = 0.0
     @State var screenHeight: CGFloat = 0.0
+    @Binding var pageIndex: Int
     
     let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
             .makeConnectable()
@@ -21,8 +22,25 @@ struct SingleFormationView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
+                Path { path in
+                    let numberOfHorizontalGridLines = 9
+                    let numberOfVerticalGridLines = 9
+                    for index in 0...numberOfVerticalGridLines {
+                        let vOffset: CGFloat = CGFloat(index) * 0.1 * screenWidth
+                        path.move(to: CGPoint(x: vOffset, y: 0))
+                        path.addLine(to: CGPoint(x: vOffset, y: screenHeight))
+                    }
+                    for index in 0...numberOfHorizontalGridLines {
+                        let hOffset: CGFloat = CGFloat(index) * 0.1 * screenHeight
+                        path.move(to: CGPoint(x: 0, y: hOffset))
+                        path.addLine(to: CGPoint(x: screenWidth, y: hOffset))
+                    }
+                }
+                .stroke()
+                .opacity(0.25)
+                
                 ForEach(formation.dancers) { dancer in
-                    DancerIcon(formation: formation, dancer: dancer, posx: dancer.position[0], posy: dancer.position[1], screenWidth: $screenWidth, screenHeight: $screenHeight, circleSize: geometry.size.width*0.05)
+                    DancerIcon(formation: formation, dancer: dancer, posx: dancer.position[0], posy: dancer.position[1], screenWidth: $screenWidth, screenHeight: $screenHeight, circleSize: geometry.size.width*0.05, pageIndex: $pageIndex)
                 }
                 
 //                Button("check") {
@@ -63,7 +81,7 @@ struct SingleFormationView_Previews: PreviewProvider {
         let dancer1 = DancerModel(number: 1, position: [25.0, 25.0])
         let dancer2 = DancerModel(number: 2, position: [50.0, 50.0])
         let formation = FormationModel(name: "Formation 1", dancers: [dancer1, dancer2], tag: 0)
-        SingleFormationView(formation: formation)
+        SingleFormationView(formation: formation, pageIndex: .constant(0))
 //            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
