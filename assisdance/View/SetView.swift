@@ -45,7 +45,7 @@ struct SetView: View {
                                 }
                             }
                             Spacer()
-                            FormationView(set: set, formation: formation, pageIndex: $pageIndex, transition: $transition)
+                            FormationView(set: set, formation: formation, pageIndex: $pageIndex, transition: $transition, formationLen: formation.formationDuration, transitionLen: formation.transitionDuration)
                                 .aspectRatio(contentMode: .fit)
                             Spacer()
                             if formation == set.formations.last {

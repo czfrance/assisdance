@@ -37,4 +37,13 @@ struct SetModel: Identifiable, Codable {
     func getNumDancers() -> Int {
         return numDancers
     }
+    
+    mutating func updateFormation(fId: UUID, fDuration: Double, tDuration: Double) {
+        for f in formations {
+            if f.id == fId {
+                f.updateFormationDuration(newDuration: fDuration)
+                f.updateTransitionDuration(newDuration: tDuration)
+            }
+        }
+    }
 }

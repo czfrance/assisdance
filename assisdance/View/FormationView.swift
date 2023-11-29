@@ -9,6 +9,10 @@ import SwiftUI
 
 struct FormationView: View {
     
+    enum FocusedField {
+        case dec
+    }
+    
     @EnvironmentObject var formationBook: FormationBookViewModel
     @State var set: SetModel
     @State var formation: FormationModel
@@ -16,6 +20,8 @@ struct FormationView: View {
     @State private var drawPath = false
     @Binding var pageIndex: Int
     @Binding var transition: Bool
+    @State var formationLen: Double
+    @State var transitionLen: Double
     
     var body: some View {
         GeometryReader { geometry in
@@ -55,6 +61,29 @@ struct FormationView: View {
                     .buttonStyle(.borderedProminent)
                     Spacer()
                 }
+                //TODO: set initial value to the saved value!!!
+                HStack {
+                    Spacer()
+                    Stepper("Formation Length: \(formationLen.formatted()) s", value: $formationLen, step: 0.1, onEditingChanged: {_ in
+                        print("changed to \(formationLen)")
+                        formation.updateFormationDuration(newDuration: formationLen)
+                        set.updateFormation(fId: formation.id, fDuration: formationLen, tDuration: transitionLen)
+                    })
+                        .fixedSize()
+                        .font(.system(size: 24, design: .default))
+                    Spacer()
+                }
+                HStack {
+                    Spacer()
+                    Stepper("Transition Length: \(transitionLen.formatted()) s", value: $transitionLen, step: 0.1, onEditingChanged: {_ in
+                        print("changed to \(transitionLen)")
+                        formation.updateTransitionDuration(newDuration: transitionLen)
+                        set.updateFormation(fId: formation.id, fDuration: formationLen, tDuration: transitionLen)
+                    })
+                        .fixedSize()
+                        .font(.system(size: 24, design: .default))
+                    Spacer()
+                }
             }
         }
         .cornerRadius(20)
@@ -81,7 +110,7 @@ struct FormationView_Previews: PreviewProvider {
         let dancer1 = DancerModel(number: 1, name: "hello", position: [25.0, 25.0])
         let dancer2 = DancerModel(number: 2, name: "dancer 2", position: [50.0, 50.0])
         let formation = FormationModel(name: "Formation 1", dancers: [dancer1, dancer2], tag: 0)
-        FormationView(set: SetModel(name: "asdf", numDancers: 2), formation: formation, pageIndex: .constant(0), transition: .constant(false))
+        FormationView(set: SetModel(name: "asdf", numDancers: 2), formation: formation, pageIndex: .constant(0), transition: .constant(false), formationLen: formation.formationDuration, transitionLen: formation.transitionDuration)
 //            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
