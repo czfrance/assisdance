@@ -1,104 +1,92 @@
+//import SwiftUI
 //
-//  test.swift
-//  assisdance
+//// Use https://www.desmos.com/calculator/cahqdxeshd to design Beziers.
 //
-//  Created by Cynthia Z France on 11/19/23.
+//// Pick a simple example path.
+//fileprivate let W = UIScreen.main.bounds.width
+//fileprivate let H = UIScreen.main.bounds.height
 //
-
-import Foundation
-import SwiftUI
-
-class CircleView: UIView {
-    var body: some View {
-        Circle()
-            .fill(Color.gray)
-            .position(x: 100, y: 100)
-            .frame(width: 30, height: 30)
-    }
-}
-
-struct PathAnimationView: UIViewRepresentable {
-    let path: Path
-    let view: UIView
-    
-    func makeUIView(context: Context) -> UIView {
-        let keyFrameAnimation = CAKeyframeAnimation(keyPath:"position")
-        keyFrameAnimation.path = path.cgPath
-        keyFrameAnimation.duration = 2.0
-        keyFrameAnimation.isRemovedOnCompletion = false
-        view.layer.add(keyFrameAnimation, forKey: "animation")
-        
-        return view
-    }
-    
-    func updateUIView(_ uiView: UIView, context: Context) {
-        print("updating")
-    }
-}
-
-//struct PathAnimatingView<Content>: UIViewRepresentable where Content: View {
-//    let path: Path
-//    let content: () -> Content
-//    let view: UIView
+//fileprivate let p1 = CGPoint(x: 50, y: H - 50)
+//fileprivate let p2 = CGPoint(x: W - 50, y: 50)
 //
-//    func makeUIView(context: UIViewRepresentableContext<PathAnimatingView>) -> UIView {
-//        view.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-//        view.layer.cornerRadius = 50
-//        view.clipsToBounds = true
+//fileprivate var samplePath : Path {
+//    let c1 = CGPoint(x: p1.x, y: (p1.y + p2.y)/2)
+//    let c2 = CGPoint(x: p2.x, y: (p1.y + p2.y)/2)
 //
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.layer.borderWidth = 2.0
-//
-//        let animation = CAKeyframeAnimation(keyPath: #keyPath(CALayer.position))
-//            animation.duration = CFTimeInterval(3)
-//            animation.repeatCount = 3
-//            animation.path = path.cgPath
-//            animation.isRemovedOnCompletion = false
-//            animation.fillMode = .forwards
-//            animation.timingFunction = CAMediaTimingFunction(name: .linear)
-//
-//        let sub = UIHostingController(rootView: content())
-//        sub.view.translatesAutoresizingMaskIntoConstraints = false
-//
-//        view.addSubview(sub.view)
-//        sub.view.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-//        sub.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//
-//        view.layer.add(animation, forKey: "someAnimationName")
-//        return view
-//    }
-//
-//    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<PathAnimatingView>) {
-//    }
-//
-//    typealias UIViewType = UIView
+//    var result = Path()
+//    result.move(to: p1)
+//    result.addLine(to: c1)//(to: p2, control1: c1, control2: c2)
+//    result.addLine(to: c2)
+//    result.addLine(to: p2)
+//    return result
 //}
-
-struct TestAnimationByPath: View {
-    var view = UIView()
-    
-    var body: some View {
-        VStack {
-            PathAnimationView(path: Circle().path(in:
-                                                    CGRect(x: 100, y: 100, width: 50, height: 50)), view: view)
-//            PathAnimatingView(path: Circle().path(in:
-//                              CGRect(x: 100, y: 100, width: 50, height: 50))) {
-//                Circle()
-//                    .fill(Color.gray)
-//                    .position(x: 100, y: 100)
-//                    .frame(width: 30, height: 30)
+//
+//// This View's position follows the Path.
+//struct SlidingSpot : View {
+//    let path    : Path
+//    let start   : CGPoint
+//    let duration: Double = 1
+//
+//    @State var isMovingForward = false
+//
+//    var tMax : CGFloat { isMovingForward ? 1 : 0 }  // Same expressions,
+//    var opac : Double  { isMovingForward ? 1 : 0 }  // different meanings.
+//
+//    var body: some View {
+//        VStack {
+//            Text("Hi")
+//            Circle()
+//            .frame(width: 30)
+//
+//            // Asperi is correct that this Modifier must be separate.
+//            .modifier(Moving(time: tMax, path: path, start: start))
+//
+//            .animation(.easeInOut(duration: duration), value: tMax)
+//            .opacity(opac)
+//
+////            Button {
+////                isMovingForward = true
+////
+////                // Sneak back to p1. This is a code smell.
+////                DispatchQueue.main.asyncAfter(deadline: .now() + duration + 0.1) {
+////                    isMovingForward = false
+////                }
+////            } label: {
+////                Text("Go")
+////            }
+//        }
+//        .onAppear {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                isMovingForward = true
 //            }
-        }
-    }
-    
-    func animationTest() {
-        let dancer = CALayer()
-        dancer.frame = CGRect(x: 100, y: 100, width: 50, height: 50)
-        dancer.contents = Circle().fill(Color.gray)
-            .position(x: 100, y: 100)
-            .frame(width: 30, height: 30)
-        
-        
-    }
-}
-
+//            DispatchQueue.main.asyncAfter(deadline: .now() + duration + 0.1) {
+//                isMovingForward = false
+//            }
+//        }
+//    }
+//}
+//
+//// Minimal modifier.
+//struct Moving: AnimatableModifier {
+//    var time : CGFloat  // Normalized from 0...1.
+//    let path : Path
+//    let start: CGPoint  // Could derive from path.
+//
+//    var animatableData: CGFloat {
+//        get { time }
+//        set { time = newValue }
+//    }
+//
+//    func body(content: Content) -> some View {
+//        content
+//        .position(
+//            path.trimmedPath(from: 0, to: time).currentPoint ?? start
+//        )
+//    }
+//}
+//
+////struct ContentView: View {
+////    var body: some View {
+////        SlidingSpot(path: samplePath, start: p1)
+////    }
+////}

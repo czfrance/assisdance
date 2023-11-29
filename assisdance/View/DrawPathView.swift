@@ -13,11 +13,11 @@ struct DrawPathView: View {
     @State var formation1: FormationModel
     @State var formation2: FormationModel?
     @State var selectedDancer: UUID
-    @Environment(\.undoManager) var undoManager
     @State var canvas = PKCanvasView()
     @State var button_enabled: Bool = false
     @State var pathDrawn: [[CGFloat]] = []
     @Environment(\.presentationMode) var presentationMode
+    @State var size: CGSize = .zero
     
     var body: some View {
         GeometryReader { geometry in
@@ -29,14 +29,16 @@ struct DrawPathView: View {
                     Spacer()
                 }
                 .padding(.top, 25)
-                ZStack {
-                    SingleFormationView(formation: formation1)
-                    if formation2 != nil {
-                        SingleFormationView(formation: formation2!)
-                            .opacity(0.25)
+                GeometryReader { geo in
+                    ZStack {
+                        SingleFormationView(formation: formation1, pageIndex: .constant(0))
+                        if formation2 != nil {
+                            SingleFormationView(formation: formation2!, pageIndex: .constant(0))
+                                .opacity(0.25)
+                        }
+                        DrawView(canvas: $canvas, button_enabled: $button_enabled, pathDrawn: $pathDrawn, screenSize: $size)
+                            .border(.red, width: 5)
                     }
-                    DrawView(canvas: $canvas, button_enabled: $button_enabled, pathDrawn: $pathDrawn)
-                        .border(.red, width: 5)
                 }
                 Button(
                     action: {
@@ -56,9 +58,7 @@ struct DrawPathView: View {
                 Button(
                     action: {
                         print("confirm")
-                        print(pathDrawn)
                         formation1.updateDancerPath(dId: selectedDancer, path: pathDrawn)
-//                        formation1.updateDancerPath(dId: selectedDancer, path: pathDrawn.map { $0.map{ Double($0) } })
                         presentationMode.wrappedValue.dismiss()
                     },
                     label: {

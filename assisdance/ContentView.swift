@@ -14,14 +14,6 @@ struct ContentView: View {
                 .environmentObject(Auth.shared)
         }
         .padding()
-        
-        
-        
-//        VStack {
-//            DrawingView()
-//            Spacer()
-//            TestAnimationByPath()
-//        }
     }
 }
 //profric

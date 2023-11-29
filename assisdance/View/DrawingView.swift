@@ -9,7 +9,6 @@ import SwiftUI
 import PencilKit
 
 struct DrawingView: View {
-    @Environment(\.undoManager) var undoManager
     @State var canvas = PKCanvasView()
     @State var button_enabled: Bool = false
     @State var pathDrawn: [[CGFloat]] = []
@@ -17,15 +16,6 @@ struct DrawingView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-//            Button("Clear") {
-//                canvas.drawing = PKDrawing()
-//            }
-//            Button("Undo") {
-//                undoManager?.undo()
-//            }
-//            Button("Redo") {
-//                undoManager?.redo()
-//            }
             Button(
                 action: {
                     print("clear")
@@ -55,11 +45,7 @@ struct DrawingView: View {
             .disabled(!button_enabled)
             
             ZStack() {
-//                Rectangle()
-//                    .fill(.red)
-//                    .frame(width:200, height:200)
-//                    .position(x: 100, y: 0)
-                DrawView(canvas: $canvas, button_enabled: $button_enabled, pathDrawn: $pathDrawn)
+                DrawView(canvas: $canvas, button_enabled: $button_enabled, pathDrawn: $pathDrawn, screenSize: .constant(.zero))
                     .border(.red, width: 5)
             }
         }
@@ -71,6 +57,7 @@ struct DrawView: UIViewRepresentable {
     @Binding var canvas: PKCanvasView
     @Binding var button_enabled: Bool
     @Binding var pathDrawn: [[CGFloat]]
+    @Binding var screenSize: CGSize
 
     let ink = PKInkingTool(.pen, color: .black, width: 10)
     
@@ -81,6 +68,7 @@ struct DrawView: UIViewRepresentable {
         canvas.backgroundColor = .clear
         canvas.isOpaque = false
         canvas.delegate = context.coordinator
+        screenSize = UIScreen.main.bounds.size
         return canvas
     }
     
@@ -115,16 +103,11 @@ extension Coordinator: PKCanvasViewDelegate {
         //get the points of the line drawn
         for stroke in strokes {
             let points = stroke.path.interpolatedPoints(by: .distance(3))
-            
-            let pathPoints = points.map { [$0.location.x, $0.location.y] }
+            let pathPoints = points.map { [$0.location.x / canvasView.bounds.width, $0.location.y / canvasView.bounds.height] }
             
             pathDrawn = pathPoints
             print("-----done-----")
-          
-    //          PathAnimatingView(path: path) {
-    //              Circle()
-    //                  .fill(Color.gray)
-    //          }
+
         }
       
         //only allow user to draw one line

@@ -6,21 +6,22 @@
 //
 
 import SwiftUI
-//var circleSize: CGFloat = 50
-//var outlineSize: CGFloat = circleSize*1.3
 
 struct DancerIcon: Shape {
     @EnvironmentObject var formationBook: FormationBookViewModel
     @State var formation: FormationModel
     @State var dancer: DancerModel
-    @State var posx: CGFloat //this is already multiplied by width
-    @State var posy: CGFloat //this is already multiplied by height
+    @State var posx: CGFloat
+    @State var posy: CGFloat
     @State var isDragging = false
     @State var move = false
     @Binding var screenWidth: CGFloat
     @Binding var screenHeight: CGFloat
     var circleSize: CGFloat
     @State var orientation = UIDevice.current.orientation
+    @State var dragAmount = CGSize.zero
+    @Binding var pageIndex: Int
+    @Binding var op: Bool
     
     let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
             .makeConnectable()
@@ -35,7 +36,6 @@ struct DancerIcon: Shape {
         return Path()
     }
     
-    @State var dragAmount = CGSize.zero
     
     func update_pos() {
         posx += self.dragAmount.width / screenWidth
@@ -49,6 +49,15 @@ struct DancerIcon: Shape {
         formation.updateDancer(dId: dancer.id, x: posx, y: posy)
         print(formation)
     }
+    
+//    func movePos(xAmount: CGFloat, yAmount: CGFloat, duration: TimeInterval) {
+//        print("dancer: \(dancer.number)")
+//        print(xAmount)
+//        withAnimation(.linear(duration: duration)) {
+//            self.dragAmount = CGSize(width: xAmount, height: yAmount)
+//        }
+//        print(self.dragAmount)
+//    }
     
     var body: some View {
         ZStack {
@@ -74,12 +83,6 @@ struct DancerIcon: Shape {
                     self.orientation = UIDevice.current.orientation
                     _ = self.position(x: posx*screenWidth, y: posy*screenHeight)
                 }
-            //            .onTapGesture{
-            //                posx += 300
-            //                posy += 300
-            //                move = true
-            //                _ = self.position(x: posx, y: posy)
-            //            }
             Circle()
                 .fill(Color.mint)
                 .frame(width: isDragging == true ? circleSize*1.1 : circleSize, height: isDragging == true ? circleSize*1.1 : circleSize)
@@ -113,6 +116,7 @@ struct DancerIcon: Shape {
                         }
                 )
         }
+        .opacity(op == true ? 0 : 1)
     }
 }
 
@@ -120,6 +124,6 @@ struct DancerIcon_Previews: PreviewProvider {
     static var previews: some View {
         let dancer = DancerModel(number: 1, position: [0.5, 0.5])
         let formation = FormationModel(name: "formation", dancers: [], tag: 0)
-        DancerIcon(formation: formation, dancer: dancer, posx: 0.5, posy: 0.5, screenWidth: .constant(800.0), screenHeight: .constant(600.0), circleSize: 50)
+        DancerIcon(formation: formation, dancer: dancer, posx: 0.5, posy: 0.5, screenWidth: .constant(800.0), screenHeight: .constant(600.0), circleSize: 50, pageIndex: .constant(0), op: .constant(false))
     }
 }
