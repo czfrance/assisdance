@@ -116,15 +116,21 @@ struct SetView: View {
     }
     
     func decrementPage() {
-        pageIndex -= 1
+        if pageIndex > 0 {
+            pageIndex -= 1
+        }
     }
     
     func incrementPage() {
-        pageIndex += 1
+        if pageIndex < set.formations.count-1 {
+            pageIndex += 1
+        }
     }
     
     func goToPage(page: Int) {
-        pageIndex = page
+        if (0 <= page) && (page < set.formations.count) {
+            pageIndex = page
+        }
     }
 }
 
