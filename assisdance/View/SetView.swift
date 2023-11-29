@@ -45,7 +45,7 @@ struct SetView: View {
                                 }
                             }
                             Spacer()
-                            FormationView(set: set, formation: formation, pageIndex: $pageIndex, transition: $transition, formationLen: formation.formationDuration, transitionLen: formation.transitionDuration)
+                            FormationView(set: $set, formation: formation, pageIndex: $pageIndex, transition: $transition, formationLen: formation.formationDuration, transitionLen: formation.transitionDuration)
                                 .aspectRatio(contentMode: .fit)
                             Spacer()
                             if formation == set.formations.last {
@@ -93,15 +93,23 @@ struct SetView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 Spacer()
-                Button("Save") {
-                    formationBook.addSet(set)
-                    formationBook.saveSets()
-                    print(set)
-                    for s in formationBook.sets {
-                        print(s)
+                HStack {
+                    Button("Save") {
+                        formationBook.addSet(set)
+                        formationBook.saveSets()
+                        print(set)
+                        for s in formationBook.sets {
+                            print(s)
+                        }
                     }
+                    .buttonStyle(.borderedProminent)
+                    Menu("Export") {
+//                        Button("PDF", action: )
+//                        Button("Video", action: )
+//                        Button("Cancel", action: )
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
             }
         }
     }

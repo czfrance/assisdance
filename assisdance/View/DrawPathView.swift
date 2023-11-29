@@ -31,9 +31,9 @@ struct DrawPathView: View {
                 .padding(.top, 25)
                 GeometryReader { geo in
                     ZStack {
-                        SingleFormationView(formation: formation1, pageIndex: .constant(0), transition: .constant(false))
+                        SingleFormationView(set: .constant(SetModel(name: "temp", numDancers: 1)), formation: formation1, transition: .constant(false))
                         if formation2 != nil {
-                            SingleFormationView(formation: formation2!, pageIndex: .constant(0), transition: .constant(false))
+                            SingleFormationView(set: .constant(SetModel(name: "temp", numDancers: 1)), formation: formation2!,  transition: .constant(false))
                                 .opacity(0.25)
                         }
                         DrawView(canvas: $canvas, button_enabled: $button_enabled, pathDrawn: $pathDrawn, screenSize: $size)

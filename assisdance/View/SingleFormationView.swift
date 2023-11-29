@@ -9,12 +9,12 @@ import SwiftUI
 
 struct SingleFormationView: View {
     @EnvironmentObject var formationBook: FormationBookViewModel
+    @Binding var set: SetModel
     @State var formation: FormationModel
-    @State var nextFormation: FormationModel?
+//    @State var nextFormation: FormationModel?
     @State var orientation = UIDevice.current.orientation
     @State var screenWidth: CGFloat = 0.0
     @State var screenHeight: CGFloat = 0.0
-    @Binding var pageIndex: Int
     @Binding var transition: Bool
     
     let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
@@ -23,6 +23,20 @@ struct SingleFormationView: View {
     
     @State var dancerIcons: [DancerIcon] = []
 //    @State var transition: Bool = false
+    
+    func getNextFormation() -> FormationModel? {
+        print("called")
+        for (i, currFormation) in set.formations.enumerated() {
+            if currFormation.id == self.formation.id {
+                if i < set.formations.count-1 {
+                    return set.formations[i+1]
+                } else {
+                    return nil
+                }
+            }
+        }
+        return nil
+    }
     
     func makePath(dancer: DancerModel) -> [[CGFloat]] {
         var result: [[CGFloat]] = []
@@ -33,8 +47,9 @@ struct SingleFormationView: View {
             result.append([p[0], p[1]])
         }
         
-        if nextFormation != nil {
-            let nextPos = dancerNextPosition(dId: dancer.id)
+        let nextFormations = getNextFormation()
+        if nextFormations != nil {
+            let nextPos = dancerNextPosition(dId: dancer.id, nextFormation: nextFormations!)
             if nextPos != nil {
                 result.append([nextPos![0], nextPos![1]])
             }
@@ -43,8 +58,8 @@ struct SingleFormationView: View {
         return result
     }
     
-    func dancerNextPosition(dId: UUID) -> [Double]? {
-        for d in nextFormation!.dancers {
+    func dancerNextPosition(dId: UUID, nextFormation: FormationModel) -> [Double]? {
+        for d in nextFormation.dancers {
             if d.id == dId {
                 return d.position
             }
@@ -100,14 +115,14 @@ struct SingleFormationView: View {
                     switch transition {
                     case true:
                         ForEach(formation.dancers) { dancer in
-                            MovingDancerIcon(formation: formation, dancer: dancer, posx: dancer.position[0], posy: dancer.position[1], screenWidth: $screenWidth, screenHeight: $screenHeight, circleSize: geometry.size.width*0.05, pageIndex: $pageIndex, path: makePath(dancer: dancer), start: CGPoint(x: dancer.position[0], y: dancer.position[1]), duration: formation.transitionDuration)
+                            MovingDancerIcon(formation: formation, dancer: dancer, posx: dancer.position[0], posy: dancer.position[1], screenWidth: $screenWidth, screenHeight: $screenHeight, circleSize: geometry.size.width*0.05, path: makePath(dancer: dancer), start: CGPoint(x: dancer.position[0], y: dancer.position[1]), duration: formation.transitionDuration)
                         }
                     default:
                         EmptyView()
                     }
                     
                     ForEach(formation.dancers) { dancer in
-                        DancerIcon(formation: formation, dancer: dancer, posx: dancer.position[0], posy: dancer.position[1], screenWidth: $screenWidth, screenHeight: $screenHeight, circleSize: geometry.size.width*0.05, pageIndex: $pageIndex, op: $transition)
+                        DancerIcon(formation: formation, dancer: dancer, posx: dancer.position[0], posy: dancer.position[1], screenWidth: $screenWidth, screenHeight: $screenHeight, circleSize: geometry.size.width*0.05, op: $transition)
                     }
                     
 //                    Button(action: {
@@ -229,10 +244,11 @@ struct SingleFormationView: View {
 
 struct SingleFormationView_Previews: PreviewProvider {
     static var previews: some View {
+        let set = SetModel(name: "idk", numDancers: 5)
         let dancer1 = DancerModel(number: 1, position: [25.0, 25.0])
         let dancer2 = DancerModel(number: 2, position: [50.0, 50.0])
         let formation = FormationModel(name: "Formation 1", dancers: [dancer1, dancer2], tag: 0)
-        SingleFormationView(formation: formation, pageIndex: .constant(0), transition: .constant(false))
+        SingleFormationView(set: .constant(set), formation: formation, transition: .constant(false))
 //            .previewInterfaceOrientation(.landscapeLeft)
     }
 }

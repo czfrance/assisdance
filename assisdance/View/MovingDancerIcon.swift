@@ -20,7 +20,6 @@ struct MovingDancerIcon: Shape {
     var circleSize: CGFloat
     @State var orientation = UIDevice.current.orientation
     @State var dragAmount = CGSize.zero
-    @Binding var pageIndex: Int
     @State var path    : [[CGFloat]]
     @State var start   : CGPoint
     @State var duration: Double = 1

@@ -14,7 +14,7 @@ struct FormationView: View {
     }
     
     @EnvironmentObject var formationBook: FormationBookViewModel
-    @State var set: SetModel
+    @Binding var set: SetModel
     @State var formation: FormationModel
     @State private var dancerTransition: String = "AHH"
     @State private var drawPath = false
@@ -33,56 +33,58 @@ struct FormationView: View {
                     Spacer()
                 }
                 .padding(.top, 25)
-                SingleFormationView(formation: formation, nextFormation: getNextFormation(), pageIndex: $pageIndex, transition: $transition)
+                SingleFormationView(set: $set, formation: formation, transition: $transition)
                     .frame(width: geometry.size.width > geometry.size.height ? geometry.size.height*(4/3) : geometry.size.width, height: geometry.size.width > geometry.size.height ? geometry.size.height : geometry.size.width * 0.75)
-                HStack {
-                    Spacer()
-                    Text("draw transition path for dancer: ").font(.system(size: 24, design: .default))
-                    Picker("Dancer", selection: $dancerTransition) {
-                        Text("").tag("AHH")
-                        ForEach(formation.dancers, id: \.id) { dancer in
-                            Text(dancer.name == "" ? String(dancer.number) : dancer.name)
-                                .tag(dancer.id.description)
+                ScrollView {
+                    HStack {
+                        Spacer()
+                        Text("draw transition path for dancer: ").font(.system(size: 24, design: .default))
+                        Picker("Dancer", selection: $dancerTransition) {
+                            Text("").tag("AHH")
+                            ForEach(formation.dancers, id: \.id) { dancer in
+                                Text(dancer.name == "" ? String(dancer.number) : dancer.name)
+                                    .tag(dancer.id.description)
+                            }
                         }
+                        
+                        Button {
+                            if UUID(uuidString: dancerTransition) != nil {
+                                drawPath.toggle()
+                            }
+                            print(dancerTransition)
+                        } label: {
+                            Text("Go")
+                        }
+                        .sheet(isPresented: $drawPath) {
+                            DrawPathView(formation1: formation, formation2: getNextFormation(), selectedDancer: UUID(uuidString: dancerTransition)!)
+                                .environmentObject(formationBook)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        Spacer()
                     }
                     
-                    Button {
-                        if UUID(uuidString: dancerTransition) != nil {
-                            drawPath.toggle()
-                        }
-                        print(dancerTransition)
-                    } label: {
-                        Text("Go")
-                    }
-                    .sheet(isPresented: $drawPath) {
-                        DrawPathView(formation1: formation, formation2: getNextFormation(), selectedDancer: UUID(uuidString: dancerTransition)!)
-                            .environmentObject(formationBook)
-                    }
-                    .buttonStyle(.borderedProminent)
-                    Spacer()
-                }
-                //TODO: set initial value to the saved value!!!
-                HStack {
-                    Spacer()
-                    Stepper("Formation Length: \(formationLen.formatted()) s", value: $formationLen, step: 0.1, onEditingChanged: {_ in
-                        print("changed to \(formationLen)")
-                        formation.updateFormationDuration(newDuration: formationLen)
-                        set.updateFormation(fId: formation.id, fDuration: formationLen, tDuration: transitionLen)
-                    })
+                    HStack {
+                        Spacer()
+                        Stepper("Formation Length: \(formationLen.formatted()) s", value: $formationLen, step: 0.1, onEditingChanged: {_ in
+                            print("changed to \(formationLen)")
+                            formation.updateFormationDuration(newDuration: formationLen)
+                            set.updateFormation(fId: formation.id, fDuration: formationLen, tDuration: transitionLen)
+                        })
                         .fixedSize()
                         .font(.system(size: 24, design: .default))
-                    Spacer()
-                }
-                HStack {
-                    Spacer()
-                    Stepper("Transition Length: \(transitionLen.formatted()) s", value: $transitionLen, step: 0.1, onEditingChanged: {_ in
-                        print("changed to \(transitionLen)")
-                        formation.updateTransitionDuration(newDuration: transitionLen)
-                        set.updateFormation(fId: formation.id, fDuration: formationLen, tDuration: transitionLen)
-                    })
+                        Spacer()
+                    }
+                    HStack {
+                        Spacer()
+                        Stepper("Transition Length: \(transitionLen.formatted()) s", value: $transitionLen, step: 0.1, onEditingChanged: {_ in
+                            print("changed to \(transitionLen)")
+                            formation.updateTransitionDuration(newDuration: transitionLen)
+                            set.updateFormation(fId: formation.id, fDuration: formationLen, tDuration: transitionLen)
+                        })
                         .fixedSize()
                         .font(.system(size: 24, design: .default))
-                    Spacer()
+                        Spacer()
+                    }
                 }
             }
         }
@@ -92,6 +94,7 @@ struct FormationView: View {
     }
     
     func getNextFormation() -> FormationModel? {
+        print("called")
         for (i, currFormation) in set.formations.enumerated() {
             if currFormation.id == self.formation.id {
                 if i < set.formations.count-1 {
@@ -110,7 +113,7 @@ struct FormationView_Previews: PreviewProvider {
         let dancer1 = DancerModel(number: 1, name: "hello", position: [25.0, 25.0])
         let dancer2 = DancerModel(number: 2, name: "dancer 2", position: [50.0, 50.0])
         let formation = FormationModel(name: "Formation 1", dancers: [dancer1, dancer2], tag: 0)
-        FormationView(set: SetModel(name: "asdf", numDancers: 2), formation: formation, pageIndex: .constant(0), transition: .constant(false), formationLen: formation.formationDuration, transitionLen: formation.transitionDuration)
+        FormationView(set: .constant(SetModel(name: "asdf", numDancers: 2)), formation: formation, pageIndex: .constant(0), transition: .constant(false), formationLen: formation.formationDuration, transitionLen: formation.transitionDuration)
 //            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
