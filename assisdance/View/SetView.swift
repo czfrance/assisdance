@@ -13,6 +13,7 @@ struct SetView: View {
     @State var set: SetModel
     @State var pageIndex = 0
     private let dotAppearance = UIPageControl.appearance()
+    @State var transition: Bool = false
     
     var body: some View {
         GeometryReader{ geometry in
@@ -44,7 +45,7 @@ struct SetView: View {
                                 }
                             }
                             Spacer()
-                            FormationView(set: set, formation: formation, pageIndex: $pageIndex)
+                            FormationView(set: set, formation: formation, pageIndex: $pageIndex, transition: $transition)
                                 .aspectRatio(contentMode: .fit)
                             Spacer()
                             if formation == set.formations.last {
@@ -54,7 +55,14 @@ struct SetView: View {
                                 }
                             } else {
                                 Button {
-                                    incrementPage()
+                                    self.transition = true
+                                    let duration = currFormation(currtag: pageIndex)!.transitionDuration
+                                    print("duration: \(duration)")
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + duration + 0.1) {
+                                        self.transition = false
+                                        print("incrementing")
+                                        incrementPage()
+                                    }
                                 } label: {
                                     Image(systemName: "arrow.right")
                                 }
@@ -96,6 +104,15 @@ struct SetView: View {
                 .buttonStyle(.borderedProminent)
             }
         }
+    }
+    
+    func currFormation(currtag: Int) -> FormationModel? {
+        for f in set.formations {
+            if f.tag == currtag {
+                return f
+            }
+        }
+        return nil
     }
     
     func decrementPage() {

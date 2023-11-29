@@ -15,6 +15,7 @@ struct FormationView: View {
     @State private var dancerTransition: String = "AHH"
     @State private var drawPath = false
     @Binding var pageIndex: Int
+    @Binding var transition: Bool
     
     var body: some View {
         GeometryReader { geometry in
@@ -26,7 +27,7 @@ struct FormationView: View {
                     Spacer()
                 }
                 .padding(.top, 25)
-                SingleFormationView(formation: formation, nextFormation: getNextFormation(), pageIndex: $pageIndex)
+                SingleFormationView(formation: formation, nextFormation: getNextFormation(), pageIndex: $pageIndex, transition: $transition)
                     .frame(width: geometry.size.width > geometry.size.height ? geometry.size.height*(4/3) : geometry.size.width, height: geometry.size.width > geometry.size.height ? geometry.size.height : geometry.size.width * 0.75)
                 HStack {
                     Spacer()
@@ -80,7 +81,7 @@ struct FormationView_Previews: PreviewProvider {
         let dancer1 = DancerModel(number: 1, name: "hello", position: [25.0, 25.0])
         let dancer2 = DancerModel(number: 2, name: "dancer 2", position: [50.0, 50.0])
         let formation = FormationModel(name: "Formation 1", dancers: [dancer1, dancer2], tag: 0)
-        FormationView(set: SetModel(name: "asdf", numDancers: 2), formation: formation, pageIndex: .constant(0))
+        FormationView(set: SetModel(name: "asdf", numDancers: 2), formation: formation, pageIndex: .constant(0), transition: .constant(false))
 //            .previewInterfaceOrientation(.landscapeLeft)
     }
 }

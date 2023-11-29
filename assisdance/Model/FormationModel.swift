@@ -17,6 +17,7 @@ struct FormationModel: Identifiable, Codable, Equatable {
 //    var dancers: Dictionary<UUID, DancerModel>
     var dancers: [DancerModel]
     var tag: Int
+    var transitionDuration: Double = 1.0
     
     init(name: String, dancers: [DancerModel], tag: Int) {
         self.id = UUID()

@@ -15,13 +15,14 @@ struct SingleFormationView: View {
     @State var screenWidth: CGFloat = 0.0
     @State var screenHeight: CGFloat = 0.0
     @Binding var pageIndex: Int
+    @Binding var transition: Bool
     
     let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
             .makeConnectable()
             .autoconnect()
     
     @State var dancerIcons: [DancerIcon] = []
-    @State var transition: Bool = false
+//    @State var transition: Bool = false
     
     func makePath(dancer: DancerModel) -> [[CGFloat]] {
         var result: [[CGFloat]] = []
@@ -53,31 +54,31 @@ struct SingleFormationView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            switch dancerIcons.count {
-            case 0:
-                Path { path in
-                    let numberOfHorizontalGridLines = 9
-                    let numberOfVerticalGridLines = 9
-                    for index in 0...numberOfVerticalGridLines {
-                        let vOffset: CGFloat = CGFloat(index) * 0.1 * screenWidth
-                        path.move(to: CGPoint(x: vOffset, y: 0))
-                        path.addLine(to: CGPoint(x: vOffset, y: screenHeight))
-                    }
-                    for index in 0...numberOfHorizontalGridLines {
-                        let hOffset: CGFloat = CGFloat(index) * 0.1 * screenHeight
-                        path.move(to: CGPoint(x: 0, y: hOffset))
-                        path.addLine(to: CGPoint(x: screenWidth, y: hOffset))
-                    }
-                }
-                .stroke()
-                .opacity(0.25)
-                .onAppear {
-                    for dancer in formation.dancers {
-                        let icon = DancerIcon(formation: formation, dancer: dancer, posx: dancer.position[0], posy: dancer.position[1], screenWidth: $screenWidth, screenHeight: $screenHeight, circleSize: geometry.size.width*0.05, pageIndex: $pageIndex, op: $transition)
-                        dancerIcons.append(icon)
-                    }
-                }
-            default:
+//            switch dancerIcons.count {
+//            case 0:
+//                Path { path in
+//                    let numberOfHorizontalGridLines = 9
+//                    let numberOfVerticalGridLines = 9
+//                    for index in 0...numberOfVerticalGridLines {
+//                        let vOffset: CGFloat = CGFloat(index) * 0.1 * screenWidth
+//                        path.move(to: CGPoint(x: vOffset, y: 0))
+//                        path.addLine(to: CGPoint(x: vOffset, y: screenHeight))
+//                    }
+//                    for index in 0...numberOfHorizontalGridLines {
+//                        let hOffset: CGFloat = CGFloat(index) * 0.1 * screenHeight
+//                        path.move(to: CGPoint(x: 0, y: hOffset))
+//                        path.addLine(to: CGPoint(x: screenWidth, y: hOffset))
+//                    }
+//                }
+//                .stroke()
+//                .opacity(0.25)
+//                .onAppear {
+//                    for dancer in formation.dancers {
+//                        let icon = DancerIcon(formation: formation, dancer: dancer, posx: dancer.position[0], posy: dancer.position[1], screenWidth: $screenWidth, screenHeight: $screenHeight, circleSize: geometry.size.width*0.05, pageIndex: $pageIndex, op: $transition)
+//                        dancerIcons.append(icon)
+//                    }
+//                }
+//            default:
                 ZStack {
                     Path { path in
                         let numberOfHorizontalGridLines = 9
@@ -99,7 +100,7 @@ struct SingleFormationView: View {
                     switch transition {
                     case true:
                         ForEach(formation.dancers) { dancer in
-                            MovingDancerIcon(formation: formation, dancer: dancer, posx: dancer.position[0], posy: dancer.position[1], screenWidth: $screenWidth, screenHeight: $screenHeight, circleSize: geometry.size.width*0.05, pageIndex: $pageIndex, path: makePath(dancer: dancer), start: CGPoint(x: dancer.position[0], y: dancer.position[1]), duration: 5)
+                            MovingDancerIcon(formation: formation, dancer: dancer, posx: dancer.position[0], posy: dancer.position[1], screenWidth: $screenWidth, screenHeight: $screenHeight, circleSize: geometry.size.width*0.05, pageIndex: $pageIndex, path: makePath(dancer: dancer), start: CGPoint(x: dancer.position[0], y: dancer.position[1]), duration: formation.transitionDuration)
                         }
                     default:
                         EmptyView()
@@ -109,14 +110,14 @@ struct SingleFormationView: View {
                         DancerIcon(formation: formation, dancer: dancer, posx: dancer.position[0], posy: dancer.position[1], screenWidth: $screenWidth, screenHeight: $screenHeight, circleSize: geometry.size.width*0.05, pageIndex: $pageIndex, op: $transition)
                     }
                     
-                    Button(action: {
-                        self.transition = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 5 + 0.1) {
-                            self.transition = false
-                        }
-                    }) {
-                        Text("Move")
-                    }
+//                    Button(action: {
+//                        self.transition = true
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + formation.transitionDuration + 0.1) {
+//                            self.transition = false
+//                        }
+//                    }) {
+//                        Text("Move")
+//                    }
                 }
                 .frame(width: geometry.size.width > geometry.size.height ? geometry.size.height*(4/3) : geometry.size.width, height: geometry.size.width > geometry.size.height ? geometry.size.height : geometry.size.width * 0.75)
                 .onAppear {
@@ -136,7 +137,7 @@ struct SingleFormationView: View {
                         //                    print("\(screenWidth), \(screenHeight)")
                     }
                 }
-            }
+//            }
 //            if dancerIcons.count == 0 {
 //                Path { path in
 //                    let numberOfHorizontalGridLines = 9
@@ -231,7 +232,7 @@ struct SingleFormationView_Previews: PreviewProvider {
         let dancer1 = DancerModel(number: 1, position: [25.0, 25.0])
         let dancer2 = DancerModel(number: 2, position: [50.0, 50.0])
         let formation = FormationModel(name: "Formation 1", dancers: [dancer1, dancer2], tag: 0)
-        SingleFormationView(formation: formation, pageIndex: .constant(0))
+        SingleFormationView(formation: formation, pageIndex: .constant(0), transition: .constant(false))
 //            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
