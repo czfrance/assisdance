@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum SheetView: Identifiable {
+    var id: Self { self }
+    case formations, video
+}
+
 struct SetView: View {
     
     @EnvironmentObject var formationBook: FormationBookViewModel
@@ -14,6 +19,8 @@ struct SetView: View {
     @State var pageIndex = 0
     private let dotAppearance = UIPageControl.appearance()
     @State var transition: Bool = false
+//    @State var expPDF: Bool = false
+    @State private var showSheet: SheetView? = nil
     
     var body: some View {
         GeometryReader{ geometry in
@@ -45,7 +52,7 @@ struct SetView: View {
                                 }
                             }
                             Spacer()
-                            FormationView(set: $set, formation: formation, pageIndex: $pageIndex, transition: $transition, formationLen: formation.formationDuration, transitionLen: formation.transitionDuration)
+                            FormationView(set: $set, formation: formation, transition: $transition, formationLen: formation.formationDuration, transitionLen: formation.transitionDuration)
                                 .aspectRatio(contentMode: .fit)
                             Spacer()
                             if formation == set.formations.last {
@@ -104,13 +111,42 @@ struct SetView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     Menu("Export") {
-//                        Button("PDF", action: )
-//                        Button("Video", action: )
-//                        Button("Cancel", action: )
+                        Button("Formations") {
+                            showSheet = .formations
+                        }
+                        Button("Video") {
+                            showSheet = .video
+                        }
                     }
                     .buttonStyle(.borderedProminent)
+//                    Menu("Export") {
+//                        Button("Formations") {
+//                            expPDF.toggle()
+//                            print(expPDF)
+//                        }
+//                        .sheet(isPresented: $expPDF) {
+//                            PDFView(set: set)
+//                        }
+////                        Button("Video", action: )
+////                        Button("Cancel", action: )
+//                    }
+//                    .buttonStyle(.borderedProminent)
                 }
             }
+        }
+        .sheet(item: $showSheet) { mode in
+            content(for: mode)
+        }
+    }
+    
+    @ViewBuilder
+    func content(for mode: SheetView) -> some View {
+        switch mode {
+        case .formations:
+            PDFView(set: set)
+        case .video:
+            PDFView(set: set)
+//            EditAsset(showSheet: $showSheet)
         }
     }
     

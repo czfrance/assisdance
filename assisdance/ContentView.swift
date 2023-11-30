@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MessageUI
 
 struct ContentView: View {
     var body: some View {
@@ -15,6 +16,21 @@ struct ContentView: View {
         }
         .padding()
     }
+//    @State var result: Result<MFMailComposeResult, Error>? = nil
+//   @State var isShowingMailView = false
+//
+//    var body: some View {
+//        Button(action: {
+//            print("tapped")
+//            self.isShowingMailView.toggle()
+//        }) {
+//            Text("Tap Me")
+//        }
+//        .disabled(!MFMailComposeViewController.canSendMail())
+//        .sheet(isPresented: $isShowingMailView) {
+//            MailView(result: self.$result)
+//        }
+//    }
 }
 //profric
 struct ContentView_Previews: PreviewProvider {

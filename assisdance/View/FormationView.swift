@@ -18,7 +18,6 @@ struct FormationView: View {
     @State var formation: FormationModel
     @State private var dancerTransition: String = "AHH"
     @State private var drawPath = false
-    @Binding var pageIndex: Int
     @Binding var transition: Bool
     @State var formationLen: Double
     @State var transitionLen: Double
@@ -36,7 +35,7 @@ struct FormationView: View {
                 SingleFormationView(set: $set, formation: formation, transition: $transition)
                     .frame(width: geometry.size.width > geometry.size.height ? geometry.size.height*(4/3) : geometry.size.width, height: geometry.size.width > geometry.size.height ? geometry.size.height : geometry.size.width * 0.75)
                 ScrollView {
-                    HStack {
+                    VStack {
                         Spacer()
                         Text("draw transition path for dancer: ").font(.system(size: 24, design: .default))
                         Picker("Dancer", selection: $dancerTransition) {
@@ -108,12 +107,43 @@ struct FormationView: View {
     }
 }
 
+struct FormationViewExport: View {
+    @Binding var set: SetModel
+    var formation: FormationModel
+    var width: CGFloat
+    
+    var body: some View {
+        VStack {
+            VStack {
+                Spacer()
+                Text(formation.name).font(.system(size: 24, weight: .bold, design: .default))
+                Spacer()
+            }
+            .padding(.top, 25)
+            SingleFormationView(set: $set, formation: formation, transition: .constant(false))
+                .frame(width: width, height: width*0.75)
+            HStack {
+                Spacer()
+                Text("Formation Length: \(formation.formationDuration) s")
+                    .font(.system(size: 24, design: .default))
+                Spacer()
+            }
+            HStack {
+                Spacer()
+                Text("Formation Length: \(formation.transitionDuration) s")
+                    .font(.system(size: 24, design: .default))
+                Spacer()
+            }
+        }
+    }
+}
+
 struct FormationView_Previews: PreviewProvider {
     static var previews: some View {
         let dancer1 = DancerModel(number: 1, name: "hello", position: [25.0, 25.0])
         let dancer2 = DancerModel(number: 2, name: "dancer 2", position: [50.0, 50.0])
         let formation = FormationModel(name: "Formation 1", dancers: [dancer1, dancer2], tag: 0)
-        FormationView(set: .constant(SetModel(name: "asdf", numDancers: 2)), formation: formation, pageIndex: .constant(0), transition: .constant(false), formationLen: formation.formationDuration, transitionLen: formation.transitionDuration)
+        FormationView(set: .constant(SetModel(name: "asdf", numDancers: 2)), formation: formation, transition: .constant(false), formationLen: formation.formationDuration, transitionLen: formation.transitionDuration)
 //            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
