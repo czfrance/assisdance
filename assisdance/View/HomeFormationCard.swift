@@ -14,20 +14,30 @@ struct HomeFormationCard: View {
     
     var body: some View {
         HStack {
-            set.image
-                .resizable()
-                .frame(width: 100, height: 100)
-                .padding(.leading, 25)
+//            set.image
+//                .resizable()
+//                .frame(width: 100, height: 100)
+//                .padding(.leading, 25)
             Text(set.name)
                 .font(.system(size: 28))
             Spacer()
+        }
+        .shadow(radius: 5, x: 0, y: 5)
+        .swipeActions {
+            Button(role: .destructive){
+                formationBook.deletSet(set)
+                formationBook.saveSets()
+            } label:{
+                Label("", systemImage: "trash")
+            }
+            .tint(.red)
         }
     }
 }
 
 struct HomeFormationCard_Previews: PreviewProvider {
     static var previews: some View {
-        let set = SetModel(name: "formation 1")
+        let set = SetModel(name: "formation 1", numDancers: 5)
 //        let set = SetViewModel(setModel: setModel)
         HomeFormationCard(set: set)
     }

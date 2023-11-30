@@ -8,29 +8,42 @@
 import Foundation
 import SwiftUI
 
-struct SetModel: Identifiable {
+struct SetModel: Identifiable, Codable {
     
     var id: UUID
     var name: String
-    var imageName: String
-    var image: Image
+//    var imageName: String
+//    var image: Image
+    var numDancers: Int
+    private(set) var formations: [FormationModel] = []
     
-    init(name: String, imageName: String? = nil) {
+    init(name: String, numDancers: Int, imageName: String? = nil) {
         self.id = UUID()
         self.name = name
-        if let imageName = imageName {
-            self.imageName = imageName
-        }
-        else {
-            self.imageName = "defaultSetImage"
-        }
-        self.image = Image(self.imageName)
-        
+        self.numDancers = numDancers
+//        if let imageName = imageName {
+//            self.imageName = imageName
+//        }
+//        else {
+//            self.imageName = "defaultSetImage"
+//        }
+//        self.image = Image(self.imageName)
     }
-    
-    private(set) var formations :[FormationModel] = []
     
     mutating func addFormation(_ formation: FormationModel) {
         formations.append(formation)
+    }
+    
+    func getNumDancers() -> Int {
+        return numDancers
+    }
+    
+    mutating func updateFormation(fId: UUID, fDuration: Double, tDuration: Double) {
+        for f in formations {
+            if f.id == fId {
+                f.updateFormationDuration(newDuration: fDuration)
+                f.updateTransitionDuration(newDuration: tDuration)
+            }
+        }
     }
 }
