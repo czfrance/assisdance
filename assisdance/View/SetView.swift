@@ -110,6 +110,16 @@ struct SetView: View {
                         }
                     }
                     .buttonStyle(.borderedProminent)
+                    Button("Analyze") {
+                        let data = set.getJSON()
+                        if data != nil {
+                            makePostRequest(body: data!)
+                        }
+                        else {
+                            print("no data")
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
                     Menu("Export") {
                         Button("Formations") {
                             showSheet = .formations
@@ -119,18 +129,6 @@ struct SetView: View {
                         }
                     }
                     .buttonStyle(.borderedProminent)
-//                    Menu("Export") {
-//                        Button("Formations") {
-//                            expPDF.toggle()
-//                            print(expPDF)
-//                        }
-//                        .sheet(isPresented: $expPDF) {
-//                            PDFView(set: set)
-//                        }
-////                        Button("Video", action: )
-////                        Button("Cancel", action: )
-//                    }
-//                    .buttonStyle(.borderedProminent)
                 }
             }
         }

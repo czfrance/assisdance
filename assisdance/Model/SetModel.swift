@@ -46,4 +46,15 @@ struct SetModel: Identifiable, Codable {
             }
         }
     }
+    
+    func getJSON() -> String? {
+        var outputData = Data()
+        let encoder = JSONEncoder()
+
+        if let jsonData = try? encoder.encode(self) {
+            let json = String(data: jsonData, encoding: String.Encoding.utf8)
+            return json
+        }
+        return nil
+    }
 }

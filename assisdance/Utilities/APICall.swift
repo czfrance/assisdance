@@ -7,25 +7,17 @@
 
 import Foundation
 
-func makePostRequest() {
+func makePostRequest(body: Any) {
 //    guard let url = URL(string: "https://jasonplaceholder.typicode.com/posts") else {
 //        return
 //    }
-    
-    guard let url = URL(string: "http://127.0.0.1:5000/test_post") else {
+    guard let url = URL(string: "http://127.0.0.1:5000/calc") else {
         return
     }
-    
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    let body: [String: AnyHashable] = [
-        "userId": 1,
-        "title": "hello this is a test!",
-        "body": "body body body test"
-    ]
     request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
-    
     let task = URLSession.shared.dataTask(with: request) { data, urlResponse, error in
         guard let data = data, error == nil else {
             return

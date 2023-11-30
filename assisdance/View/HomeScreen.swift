@@ -30,16 +30,16 @@ struct HomeScreen: View {
                 .navigationTitle("Your Sets")
                 .navigationBarTitleDisplayMode(.inline)
                 
-                Button {
-                    makePostRequest()
-                } label: {
-                    Text("make a request test")
-                        .font(.system(size: 24, weight: .bold, design: .default))
-                        .frame(maxWidth: .infinity, maxHeight: 60)
-                        .foregroundColor(Color.white)
-                        .background(Color.mint)
-                        .cornerRadius(10)
-                }
+//                Button {
+//                    makePostRequest()
+//                } label: {
+//                    Text("make a request test")
+//                        .font(.system(size: 24, weight: .bold, design: .default))
+//                        .frame(maxWidth: .infinity, maxHeight: 60)
+//                        .foregroundColor(Color.white)
+//                        .background(Color.mint)
+//                        .cornerRadius(10)
+//                }
                 
                 Button {
                     newSet.toggle()

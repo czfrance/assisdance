@@ -29,4 +29,5 @@ def test_get():
 @main.route("/calc", methods=['POST'])
 def calc():
     analysis_set = request.get_json()
-    return 
+    print(analysis_set)
+    return jsonify(analysis_set), 200
