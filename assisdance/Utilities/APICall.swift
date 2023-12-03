@@ -8,7 +8,7 @@
 import Foundation
 
 func makePostRequest(body: Any) {
-//    guard let url = URL(string: "https://jasonplaceholder.typicode.com/posts") else {
+//    guard let url = URL(string: "https://jasonplaceholder.typicode.com/calc") else {
 //        return
 //    }
     guard let url = URL(string: "http://127.0.0.1:5000/calc") else {

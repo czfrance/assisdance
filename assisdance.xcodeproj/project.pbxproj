@@ -34,6 +34,7 @@
 		40C1FD642B178B6300EA8965 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1FD632B178B6200EA8965 /* MailView.swift */; };
 		40C1FD662B179A7900EA8965 /* PDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1FD652B179A7900EA8965 /* PDFView.swift */; };
 		40C1FD682B18737900EA8965 /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1FD672B18737900EA8965 /* APICall.swift */; };
+		40C1FD6A2B1CAA6700EA8965 /* SetResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1FD692B1CAA6700EA8965 /* SetResultsView.swift */; };
 		40C33CD22B0591D4002B7459 /* SingleFormationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C33CD12B0591D4002B7459 /* SingleFormationView.swift */; };
 		40C33CD42B05F3BD002B7459 /* DancerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C33CD32B05F3BC002B7459 /* DancerModel.swift */; };
 		40CC2FCB2B0BBB1A0074EA85 /* DrawPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CC2FCA2B0BBB1A0074EA85 /* DrawPathView.swift */; };
@@ -72,6 +73,7 @@
 		40C1FD632B178B6200EA8965 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		40C1FD652B179A7900EA8965 /* PDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFView.swift; sourceTree = "<group>"; };
 		40C1FD672B18737900EA8965 /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
+		40C1FD692B1CAA6700EA8965 /* SetResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetResultsView.swift; sourceTree = "<group>"; };
 		40C33CD12B0591D4002B7459 /* SingleFormationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleFormationView.swift; sourceTree = "<group>"; };
 		40C33CD32B05F3BC002B7459 /* DancerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DancerModel.swift; sourceTree = "<group>"; };
 		40CC2FCA2B0BBB1A0074EA85 /* DrawPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPathView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				40C1FD5D2B15281800EA8965 /* MovingDancerIcon.swift */,
 				40C1FD632B178B6200EA8965 /* MailView.swift */,
 				40C1FD652B179A7900EA8965 /* PDFView.swift */,
+				40C1FD692B1CAA6700EA8965 /* SetResultsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				40A81ECC2ACD56DE00B7C7CF /* LoginScreen.swift in Sources */,
 				40A81F002ACE798800B7C7CF /* SetView.swift in Sources */,
 				40A81EED2ACD6A9600B7C7CF /* RootScreen.swift in Sources */,
+				40C1FD6A2B1CAA6700EA8965 /* SetResultsView.swift in Sources */,
 				40D8182C2AA91368002C586B /* ContentView.swift in Sources */,
 				40A81EE32ACD617100B7C7CF /* LoginAction.swift in Sources */,
 				40A81EEF2ACDC5A400B7C7CF /* HomeFormationCard.swift in Sources */,

@@ -70,9 +70,26 @@ struct DancerIcon: Shape {
                     DragGesture(coordinateSpace: .global)
                         .onChanged {
                             self.isDragging = true
-                            self.dragAmount = CGSize(width: $0.translation.width, height: $0.translation.height)
+                            var w = $0.translation.width
+                            let currx = posx*screenWidth
+                            let curry = posy*screenHeight
+                            if (w + currx < 0) {
+                                w = currx * -1
+                            }
+                            else if (w + currx > screenWidth) {
+                                w = screenWidth - currx
+                            }
+                            var h = $0.translation.height
+                            if (h + curry < 0) {
+                                h = curry * -1
+                            }
+                            else if (h + curry > screenHeight) {
+                                h = screenHeight - curry
+                            }
+                            self.dragAmount = CGSize(width: w, height: h)
                         }
                         .onEnded {_ in
+                            print("ended")
                             self.isDragging = false
                             update_pos()
                         }
@@ -92,7 +109,23 @@ struct DancerIcon: Shape {
                     DragGesture(coordinateSpace: .global)
                         .onChanged {
                             self.isDragging = true
-                            self.dragAmount = CGSize(width: $0.translation.width, height: $0.translation.height)
+                            var w = $0.translation.width
+                            let currx = posx*screenWidth
+                            let curry = posy*screenHeight
+                            if (w + currx < 0) {
+                                w = currx * -1
+                            }
+                            else if (w + currx > screenWidth) {
+                                w = screenWidth - currx
+                            }
+                            var h = $0.translation.height
+                            if (h + curry < 0) {
+                                h = curry * -1
+                            }
+                            else if (h + curry > screenHeight) {
+                                h = screenHeight - curry
+                            }
+                            self.dragAmount = CGSize(width: w, height: h)
                         }
                         .onEnded {_ in
                             self.isDragging = false
@@ -107,7 +140,23 @@ struct DancerIcon: Shape {
                     DragGesture(coordinateSpace: .global)
                         .onChanged {
                             self.isDragging = true
-                            self.dragAmount = CGSize(width: $0.translation.width, height: $0.translation.height)
+                            var w = $0.translation.width
+                            let currx = posx*screenWidth
+                            let curry = posy*screenHeight
+                            if (w + currx < 0) {
+                                w = currx * -1
+                            }
+                            else if (w + currx > screenWidth) {
+                                w = screenWidth - currx
+                            }
+                            var h = $0.translation.height
+                            if (h + curry < 0) {
+                                h = curry * -1
+                            }
+                            else if (h + curry > screenHeight) {
+                                h = screenHeight - curry
+                            }
+                            self.dragAmount = CGSize(width: w, height: h)
                         }
                         .onEnded {_ in
                             self.isDragging = false
