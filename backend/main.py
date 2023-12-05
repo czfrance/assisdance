@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, jsonify, session, make_re
 import math
 from enum import Enum
 import json
+from mediapipe_impl import compare_videos
 
 
 main = Blueprint('main', __name__)
@@ -9,6 +10,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
+    print("got here")
     return "hello world!"
 
 @main.route('/profile')
@@ -302,8 +304,9 @@ temp_test = {"formations":
     "name":"set 1",
     "id":"F4DAE3A5-7EEB-4B9A-80DB-05B3598AE16E"}
 
-results = analyze_formations(temp_test)
-print(results)
+# results = analyze_formations(temp_test)
+# print(results)
+compare_videos()
 
 
 """
