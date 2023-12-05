@@ -63,23 +63,23 @@ def process_video(userVideo, choreoVideo, uStart, cStart, detector, size=(1080,1
 
             # similarity += 1/(1 + np.linalg.norm(np.array(choreo_angles)-np.array(user_angles)))
             # count += 1
-
             good_angles = ""
             bad_angles = ""
-            temp = 0
-            for i in range(len(user_angles)):
-              if i < len(user_angles)-1:
-                 choreo = [choreo_angles[i], choreo_angles[i+1]]
-                 user = [user_angles[i], user_angles[i+1]]
-                 temp += np.dot(choreo,user)/(norm(choreo)*norm(user))
-              # print(f"({user_angles[i]}, {choreo_angles[i]})")
-              if abs(choreo_angles[i] - user_angles[i]) < 5:
-                 good_angles += f"{angle_names[i]}\n"
-              else:
-                #  print("bad")
-                 bad_angles += f"{angle_names[i]}\n"
-            similarity += (temp / len(user_angles))
-            count += 1
+            if user_angles and choreo_angles:
+              temp = 0
+              for i in range(len(user_angles)):
+                if i < len(user_angles)-1:
+                  choreo = [choreo_angles[i], choreo_angles[i+1]]
+                  user = [user_angles[i], user_angles[i+1]]
+                  temp += np.dot(choreo,user)/(norm(choreo)*norm(user))
+                # print(f"({user_angles[i]}, {choreo_angles[i]})")
+                if abs(choreo_angles[i] - user_angles[i]) < 5:
+                  good_angles += f"{angle_names[i]}\n"
+                else:
+                  #  print("bad")
+                  bad_angles += f"{angle_names[i]}\n"
+              similarity += (temp / len(user_angles))
+              count += 1
                  
             combined_image = np.hstack((choreo_annotated_frame, user_annotated_frame))
 
@@ -114,8 +114,15 @@ def process_frame(image, detector):
   # STEP 4: Detect pose landmarks from the input image.
   detection_result = detector.detect(rgb_frame)
 
+  # STEP 5: Process the detection result. In this case, visualize it.
+  # annotated_image = draw_landmarks_on_image(image.numpy_view()[:,:,:3], detection_result)
+  annotated_image = draw_landmarks_on_image(image, detection_result)
+
   # get landmark locations
   mp_pose = mp.solutions.pose
+  if len(detection_result.pose_landmarks) == 0:
+     return annotated_image, None
+  
   landmarks = detection_result.pose_landmarks[0]
   lWrist = [landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].x,landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].y]
   lElbow = [landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].x,landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].y]
@@ -148,9 +155,6 @@ def process_frame(image, detector):
 
   angles = [lShoulder_angle, lElbow_angle, lHip_outer_angle, lHip_inner_angle, lKnee_angle, lAnkle_angle,
             rShoulder_angle, rElbow_angle, rHip_outer_angle, rHip_inner_angle, rKnee_angle, rAnkle_angle]
-  # STEP 5: Process the detection result. In this case, visualize it.
-  # annotated_image = draw_landmarks_on_image(image.numpy_view()[:,:,:3], detection_result)
-  annotated_image = draw_landmarks_on_image(image, detection_result)
 
   # plt.imshow(cv2.cvtColor(annotated_image, cv2.COLOR_RGB2BGR))
   # plt.show()
@@ -178,7 +182,7 @@ def draw_landmarks_on_image(rgb_image, detection_result):
   return annotated_image
 
 
-def compare_videos():
+def compare_videos(choreo_path, choreo_start, user_path, user_start):
   # STEP 2: Create an PoseLandmarker object.
   base_options = python.BaseOptions(model_asset_path='pose_landmarker_heavy.task')
   options = vision.PoseLandmarkerOptions(
@@ -186,10 +190,10 @@ def compare_videos():
       output_segmentation_masks=True)
   detector = vision.PoseLandmarker.create_from_options(options)
 
-  choreo_vid = 'sakura_very_short.mp4'
-  choreo_timestamp = 1.940
-  user_vid = 'harrison.mov'
-  user_timestamp = 1.220
+  choreo_vid = choreo_path
+  choreo_timestamp = choreo_start
+  user_vid = user_path
+  user_timestamp = user_start
 
   score = process_video(user_vid, choreo_vid, user_timestamp, choreo_timestamp, detector)
   return score

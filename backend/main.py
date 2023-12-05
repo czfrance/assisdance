@@ -40,6 +40,19 @@ def calc():
         return jsonify(results), 200
     except Exception as e:
         return jsonify({'error': e}), 400
+    
+@main.route("/pose", methods=['POST'])
+def pose():
+    data = request.get_json()
+    try:
+        choreo_vid = data['choreo_vid']
+        choreo_timestamp = float(data['choreo_timestamp'])
+        user_vid = data['user_vid']
+        user_timestamp = float(data['user_timestamp'])
+        result = compare_videos(choreo_vid, choreo_timestamp, user_vid, user_timestamp)
+        return jsonify({'percentage_match': result}), 400
+    except Exception as e:
+        return jsonify({'error': e}), 400
 
 
 class HPosition(Enum):
@@ -306,7 +319,11 @@ temp_test = {"formations":
 
 # results = analyze_formations(temp_test)
 # print(results)
-print(f"percentage: {compare_videos()}")
+choreo_vid = 'sakura_c1.mp4'
+choreo_timestamp = 0.704
+user_vid = 'cindy_c1.mov'
+user_timestamp = 1.051
+print(f"percentage: {compare_videos(choreo_vid, choreo_timestamp, user_vid, user_timestamp)}")
 
 
 """
