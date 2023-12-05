@@ -306,7 +306,7 @@ temp_test = {"formations":
 
 # results = analyze_formations(temp_test)
 # print(results)
-compare_videos()
+print(f"percentage: {compare_videos()}")
 
 
 """
