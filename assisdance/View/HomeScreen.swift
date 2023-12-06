@@ -12,6 +12,7 @@ struct HomeScreen: View {
     @ObservedObject var viewModel: HomeViewModel = HomeViewModel()
     @EnvironmentObject var formationBook: FormationBookViewModel
     @State private var newSet = false
+    @State private var pose = false
     
     var body: some View {
         VStack {
@@ -25,26 +26,16 @@ struct HomeScreen: View {
                         SetView(set: danceSet)
                     } label: {
                         HomeFormationCard(set: danceSet)
+                            .frame(maxWidth: .infinity, minHeight: 100)
                     }
                 }
                 .navigationTitle("Your Sets")
                 .navigationBarTitleDisplayMode(.inline)
                 
-//                Button {
-//                    makePostRequest()
-//                } label: {
-//                    Text("make a request test")
-//                        .font(.system(size: 24, weight: .bold, design: .default))
-//                        .frame(maxWidth: .infinity, maxHeight: 60)
-//                        .foregroundColor(Color.white)
-//                        .background(Color.mint)
-//                        .cornerRadius(10)
-//                }
-                
                 Button {
                     newSet.toggle()
                 } label: {
-                    Text("Create new Set")
+                    Text("Create New Set")
                         .font(.system(size: 24, weight: .bold, design: .default))
                         .frame(maxWidth: .infinity, maxHeight: 60)
                         .foregroundColor(Color.white)
@@ -57,17 +48,33 @@ struct HomeScreen: View {
                         .environmentObject(formationBook)
                 }
                 
-                Button(
-                    action: viewModel.logout,
-                    label: {
-                        Text("Home.LogoutButton.Title".localized)
+                HStack {
+                    Button {
+                        pose.toggle()
+                    } label: {
+                        Text("Analyze Dance")
                             .font(.system(size: 24, weight: .bold, design: .default))
                             .frame(maxWidth: .infinity, maxHeight: 60)
                             .foregroundColor(Color.white)
-                            .background(Color.red)
+                            .background(Color.gray.opacity(0.8))
                             .cornerRadius(10)
                     }
-                )
+                    .sheet(isPresented: $pose) {
+                        PoseEstimationForm()
+                    }
+                    
+                    Button(
+                        action: viewModel.logout,
+                        label: {
+                            Text("Home.LogoutButton.Title".localized)
+                                .font(.system(size: 24, weight: .bold, design: .default))
+                                .frame(maxWidth: .infinity, maxHeight: 60)
+                                .foregroundColor(Color.white)
+                                .background(Color.red)
+                                .cornerRadius(10)
+                        }
+                    )
+                }
             }
         }
         .padding(30)

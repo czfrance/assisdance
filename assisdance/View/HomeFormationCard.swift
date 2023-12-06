@@ -14,12 +14,12 @@ struct HomeFormationCard: View {
     
     var body: some View {
         HStack {
-//            set.image
-//                .resizable()
-//                .frame(width: 100, height: 100)
-//                .padding(.leading, 25)
+            Image(systemName: "figure.socialdance")
+                .font(.system(size: 50, weight: .ultraLight))
+                .padding([.leading, .trailing])
+                .foregroundColor(Color.mint)
             Text(set.name)
-                .font(.system(size: 28))
+                .font(.system(size: 40))
             Spacer()
         }
         .shadow(radius: 5, x: 0, y: 5)
@@ -32,13 +32,14 @@ struct HomeFormationCard: View {
             }
             .tint(.red)
         }
+        .cornerRadius(15)
+        .padding()
     }
 }
 
 struct HomeFormationCard_Previews: PreviewProvider {
     static var previews: some View {
         let set = SetModel(name: "formation 1", numDancers: 5)
-//        let set = SetViewModel(setModel: setModel)
         HomeFormationCard(set: set)
     }
 }
