@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		404154752B1EFBB5006AAE19 /* FormationResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404154742B1EFBB5006AAE19 /* FormationResultsView.swift */; };
+		404154772B1EFBC3006AAE19 /* TransitionResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404154762B1EFBC3006AAE19 /* TransitionResultsView.swift */; };
+		404154792B1EFBCD006AAE19 /* DancerResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404154782B1EFBCD006AAE19 /* DancerResultsView.swift */; };
+		4041547B2B1EFBD9006AAE19 /* StepByStepResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4041547A2B1EFBD9006AAE19 /* StepByStepResultsView.swift */; };
+		4041547D2B1F1D10006AAE19 /* PoseEstimationForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4041547C2B1F1D10006AAE19 /* PoseEstimationForm.swift */; };
+		4041547F2B1F3073006AAE19 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4041547E2B1F3073006AAE19 /* ResultsView.swift */; };
 		408522412AF236B8005BAAAE /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408522402AF236B8005BAAAE /* DrawingView.swift */; };
 		408522432AF38BA6005BAAAE /* DancerIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408522422AF38BA6005BAAAE /* DancerIcon.swift */; };
 		40A81ECC2ACD56DE00B7C7CF /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A81ECB2ACD56DD00B7C7CF /* LoginScreen.swift */; };
@@ -45,6 +51,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		404154742B1EFBB5006AAE19 /* FormationResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationResultsView.swift; sourceTree = "<group>"; };
+		404154762B1EFBC3006AAE19 /* TransitionResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionResultsView.swift; sourceTree = "<group>"; };
+		404154782B1EFBCD006AAE19 /* DancerResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DancerResultsView.swift; sourceTree = "<group>"; };
+		4041547A2B1EFBD9006AAE19 /* StepByStepResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepByStepResultsView.swift; sourceTree = "<group>"; };
+		4041547C2B1F1D10006AAE19 /* PoseEstimationForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseEstimationForm.swift; sourceTree = "<group>"; };
+		4041547E2B1F3073006AAE19 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		408522402AF236B8005BAAAE /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		408522422AF38BA6005BAAAE /* DancerIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DancerIcon.swift; sourceTree = "<group>"; };
 		40A81ECB2ACD56DD00B7C7CF /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
@@ -113,6 +125,12 @@
 				40C1FD632B178B6200EA8965 /* MailView.swift */,
 				40C1FD652B179A7900EA8965 /* PDFView.swift */,
 				40C1FD692B1CAA6700EA8965 /* SetResultsView.swift */,
+				404154742B1EFBB5006AAE19 /* FormationResultsView.swift */,
+				404154762B1EFBC3006AAE19 /* TransitionResultsView.swift */,
+				404154782B1EFBCD006AAE19 /* DancerResultsView.swift */,
+				4041547A2B1EFBD9006AAE19 /* StepByStepResultsView.swift */,
+				4041547C2B1F1D10006AAE19 /* PoseEstimationForm.swift */,
+				4041547E2B1F3073006AAE19 /* ResultsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -299,8 +317,10 @@
 			files = (
 				40A81ED92ACD5E5D00B7C7CF /* StringExtensions.swift in Sources */,
 				408522432AF38BA6005BAAAE /* DancerIcon.swift in Sources */,
+				4041547D2B1F1D10006AAE19 /* PoseEstimationForm.swift in Sources */,
 				40A81EE92ACD685C00B7C7CF /* HomeViewModel.swift in Sources */,
 				40C1FD662B179A7900EA8965 /* PDFView.swift in Sources */,
+				404154792B1EFBCD006AAE19 /* DancerResultsView.swift in Sources */,
 				40A81F042ACEA26800B7C7CF /* NewSetView.swift in Sources */,
 				40A81ECC2ACD56DE00B7C7CF /* LoginScreen.swift in Sources */,
 				40A81F002ACE798800B7C7CF /* SetView.swift in Sources */,
@@ -315,10 +335,14 @@
 				40A81EDC2ACD605200B7C7CF /* LoginViewModel.swift in Sources */,
 				40A81EE72ACD67FB00B7C7CF /* HomeScreen.swift in Sources */,
 				408522412AF236B8005BAAAE /* DrawingView.swift in Sources */,
+				404154752B1EFBB5006AAE19 /* FormationResultsView.swift in Sources */,
 				40D8182A2AA91368002C586B /* assisdanceApp.swift in Sources */,
+				404154772B1EFBC3006AAE19 /* TransitionResultsView.swift in Sources */,
+				4041547B2B1EFBD9006AAE19 /* StepByStepResultsView.swift in Sources */,
 				40C1FD5E2B15281800EA8965 /* MovingDancerIcon.swift in Sources */,
 				40A81EF62ACDE8B000B7C7CF /* SetModel.swift in Sources */,
 				40A81EE02ACD610B00B7C7CF /* LoginResponse.swift in Sources */,
+				4041547F2B1F3073006AAE19 /* ResultsView.swift in Sources */,
 				40C1FD642B178B6300EA8965 /* MailView.swift in Sources */,
 				40C33CD42B05F3BD002B7459 /* DancerModel.swift in Sources */,
 				40A81F022ACE990000B7C7CF /* FormationView.swift in Sources */,

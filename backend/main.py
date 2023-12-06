@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, jsonify, session, make_re
 import math
 from enum import Enum
 import json
-from mediapipe_impl import compare_videos
+from .mediapipe_impl import compare_videos
 
 
 main = Blueprint('main', __name__)
@@ -37,8 +37,10 @@ def calc():
     try:
         analysis_set = json.loads(analysis_set)
         results = analyze_formations(analysis_set)
+        print(results)
         return jsonify(results), 200
     except Exception as e:
+        print(f"error: {e}")
         return jsonify({'error': e}), 400
     
 @main.route("/pose", methods=['POST'])
@@ -50,8 +52,10 @@ def pose():
         user_vid = data['user_vid']
         user_timestamp = float(data['user_timestamp'])
         result = compare_videos(choreo_vid, choreo_timestamp, user_vid, user_timestamp)
+        print(result)
         return jsonify({'percentage_match': result}), 400
     except Exception as e:
+        print(f"error: {e}")
         return jsonify({'error': e}), 400
 
 
@@ -317,13 +321,13 @@ temp_test = {"formations":
     "name":"set 1",
     "id":"F4DAE3A5-7EEB-4B9A-80DB-05B3598AE16E"}
 
-# results = analyze_formations(temp_test)
-# print(results)
-choreo_vid = 'sakura_c1.mp4'
-choreo_timestamp = 0.704
-user_vid = 'cindy_c1.mov'
-user_timestamp = 1.051
-print(f"percentage: {compare_videos(choreo_vid, choreo_timestamp, user_vid, user_timestamp)}")
+results = analyze_formations(temp_test)
+print(results)
+# choreo_vid = 'sakura_c1.mp4'
+# choreo_timestamp = 0.704
+# user_vid = 'cindy_c1.mov'
+# user_timestamp = 1.051
+# print(f"percentage: {compare_videos(choreo_vid, choreo_timestamp, user_vid, user_timestamp)}")
 
 
 """
