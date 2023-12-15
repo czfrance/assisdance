@@ -15,10 +15,13 @@
 ### One-time Setup:
 
 1. Open the backend directory in VSCode
-2. Create a Python virtual environemnt (requires Python 3.10).
+2. Create a Python virtual environemnt (requires Python 3.10, install/upgrade if needed).
+  ```bash
+  python3.10 -m venv "[your venv name]"
+  ```
 3. Activate the Python venv:
   ```bash
-  source [virtual environment name]/bin/activate
+  source [your venv name]/bin/activate
   ```
 4. Install necessary packages
 
