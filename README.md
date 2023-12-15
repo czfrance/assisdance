@@ -54,6 +54,7 @@ From here, you should be able to make API calls from the frontend to the backend
   - Calls up a modal.
   - Asks for demo and user video, as well as start timestamps in seconds.
   - Submission makes API call to Python Flask backend for dance analysis (see backend section below).
+    - NOTE: due to running the server on localhost, the API call can only connect to the server when the call is made on Simulator (not physical device)
 
 ### Set Creation
 
@@ -73,6 +74,7 @@ From here, you should be able to make API calls from the frontend to the backend
 - Only allows the user to draw 1 continuous line (to prevent confusion).
 - User can clear the current path and draw again.
 - Upon path confirmation, the user will move in this way to the next formation.
+- NOTE: the XCode Simulator has a bug where drawn paths are not displayed. It is recommended to use a physical device for this.
 
 ### Toggle Between Different Formations
 
@@ -84,6 +86,7 @@ From here, you should be able to make API calls from the frontend to the backend
 - Dancer position is dynamic and will adjust based on the size of the stage displayed, so their location will always be relative to the grid.
 - Save button to save formations to persistent storage.
 - Analyze button makes API call to Python Flask backend to analyze set statistics for the current set (see backend section below).
+  - NOTE: due to running the server on localhost, the API call can only connect to the server when the call is made on Simulator (not physical device)
 - Export formations to PDF (in progress).
 
 ## Back-End / Analysis
