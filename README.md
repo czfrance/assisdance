@@ -6,30 +6,30 @@
 ## Frontend
 
 1. Open XCode project.
-2. Connect a physical device to the computer.
-3. Select the physical device as the simulator target.
+2. Connect a physical device to the computer (if you choose this option)
+3. Select the desired device as the simulator target.
 4. Click the play button.
 
 ## Backend
 
-1. Open the backend directory in VSCode.
-
 ### One-time Setup:
 
-- Create a Python environment (requires Python 3.10).
-- Activate the Python environment:
+1. Open the backend directory in VSCode
+2. Create a Python virtual environemnt (requires Python 3.10).
+3. Activate the Python venv:
   ```bash
   source [virtual environment name]/bin/activate
   ```
-- install necessary packages
+4. Install necessary packages
 
 ### To run the Flask App:
-- Set flask environment
+1. Open the backend directory in VSCode
+2. Set flask environment
   ```bash
   export FLASK_APP=__init__.py
   export FLASK_ENV=development
   ```
-- run the app
+3. Run the app
   ```bash
   flask run
   ```
