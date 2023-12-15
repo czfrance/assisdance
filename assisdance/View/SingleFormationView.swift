@@ -25,7 +25,7 @@ struct SingleFormationView: View {
 //    @State var transition: Bool = false
     
     func getNextFormation() -> FormationModel? {
-        print("called")
+//        print("called")
         for (i, currFormation) in set.formations.enumerated() {
             if currFormation.id == self.formation.id {
                 if i < set.formations.count-1 {

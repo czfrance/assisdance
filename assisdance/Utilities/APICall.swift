@@ -7,50 +7,35 @@
 
 import Foundation
 
-func makePostRequest() {
-//    guard let url = URL(string: "https://jasonplaceholder.typicode.com/posts") else {
+func makePostRequest(body: Any, endpoint: String) -> [String: AnyObject]? {
+//    guard let url = URL(string: "https://jasonplaceholder.typicode.com/calc") else {
 //        return
 //    }
-    
-    guard let url = URL(string: "http://127.0.0.1:5000/test_post") else {
-        return
+    guard let url = URL(string: "http://127.0.0.1:5000/\(endpoint)") else {
+        return nil
     }
-    
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    let body: [String: AnyHashable] = [
-        "userId": 1,
-        "title": "hello this is a test!",
-        "body": "body body body test"
-    ]
     request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
     
+    var result: [String: AnyObject] = [:]
     let task = URLSession.shared.dataTask(with: request) { data, urlResponse, error in
         guard let data = data, error == nil else {
             return
         }
         
         do {
-            let response = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            let response = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String : AnyObject] ?? [:]
             print("SUCCESS: \(response)")
+            result = response
         } catch {
             print("errorrr: \(error)")
         }
     }
     task.resume()
     
-    
-    /*
-     const response = await fetch("http://127.0.0.1:5000/register", {
-         credentials: "include",
-         method: "POST",
-         headers: {
-             "Content-Type": "application/json",
-         },
-         body: JSON.stringify(user_info),
-     })
-     */
+    return result
 }
 
 func makeGetRequest() {
