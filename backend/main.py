@@ -37,6 +37,7 @@ def calc():
     try:
         analysis_set = json.loads(analysis_set)
         results = analyze_formations(analysis_set)
+        print("RESULTS")
         print(results)
         return jsonify(results), 200
     except Exception as e:
@@ -45,12 +46,14 @@ def calc():
     
 @main.route("/pose", methods=['POST'])
 def pose():
-    data = request.get_json()
+    response = request.get_json()
     try:
+        data = json.loads(response)
         choreo_vid = data['choreo_vid']
         choreo_timestamp = float(data['choreo_timestamp'])
         user_vid = data['user_vid']
         user_timestamp = float(data['user_timestamp'])
+        print(f"{choreo_vid}, {choreo_timestamp}, {user_vid}, {user_timestamp}")
         result = compare_videos(choreo_vid, choreo_timestamp, user_vid, user_timestamp)
         print(result)
         return jsonify({'percentage_match': result}), 400
@@ -106,7 +109,7 @@ def analyze_formations(anly_set):
 
     for i, formation in enumerate(formations):
         tag = formation['tag']
-        print(f'formation {tag}')
+        # print(f'formation {tag}')
         #calc formation stuff
         gen_info = {
             'total_len': formation['formationDuration'] + formation['transitionDuration'],
@@ -136,7 +139,7 @@ def analyze_formations(anly_set):
         dancer_info = {}
         nextDancers = None if i == len(formations)-1 else formations[i+1]['dancers']
         for dancer in dancers:
-            print(f"dancer {dancer['number']}")
+            # print(f"dancer {dancer['number']}")
             total_path = []
             total_path.append(dancer['position'])
             total_path.extend(dancer['path'])
@@ -321,8 +324,8 @@ temp_test = {"formations":
     "name":"set 1",
     "id":"F4DAE3A5-7EEB-4B9A-80DB-05B3598AE16E"}
 
-results = analyze_formations(temp_test)
-print(results)
+# results = analyze_formations(temp_test)
+# print(results)
 # choreo_vid = 'sakura_c1.mp4'
 # choreo_timestamp = 0.704
 # user_vid = 'cindy_c1.mov'
