@@ -53,8 +53,15 @@ From here, you should be able to make API calls from the frontend to the backend
 - **Analyze Dance Button**
   - Calls up a modal.
   - Asks for demo and user video, as well as start timestamps in seconds.
+    - the video should be located in the backend directory
   - Submission makes API call to Python Flask backend for dance analysis (see backend section below).
     - NOTE: due to running the server on localhost, the API call can only connect to the server when the call is made on Simulator (not physical device)
+  - Example submission:
+    - Original Choreography: sakura_very_short.mp4
+    - Original Choreography Start Timestamp: 1.940
+    - Your Dancing: harrison.mov
+    - Your Start Timestamp: 1.220
+
 
 ### Set Creation
 
