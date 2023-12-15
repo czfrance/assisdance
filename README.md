@@ -44,6 +44,7 @@ From here, you should be able to make API calls from the frontend to the backend
 
 
 # Features
+Demo Video: 
 
 ## Front-End / Formation
 
@@ -111,6 +112,7 @@ From here, you should be able to make API calls from the frontend to the backend
     - Per formation summary
     - Per transition summary
     - Step-by-Step summary
+- An example of the returned dictionary is in the backend directory, named results.json
 
 #### Entire Set Summary
 
@@ -165,6 +167,7 @@ From here, you should be able to make API calls from the frontend to the backend
 ### Dance Choreography Analysis
 
 - Purpose: Analyze the user’s dancing accuracy compared to the original choreography demo.
+- An example of the returned video is in the backend directory, named final.mp4
 - Takes in 2 videos of 1 person dancing: one should be the “example/original/demo” video, and the other being the user’s self-taken video, as well as timestamps in seconds denoting where the choreography starts in each video.
 - Automatically aligns videos based on the given timestamp for frame-by-frame analysis.
 - Uses MediaPipe’s pose estimation to find landmarks on the person’s body position in each video.
