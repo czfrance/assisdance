@@ -1,4 +1,44 @@
 # assisdance
+### All-Inclusive Dance Assistance Software
+
+# Project Setup and Running Instructions
+
+## Frontend
+
+1. Open XCode project.
+2. Connect a physical device to the computer.
+3. Select the physical device as the simulator target.
+4. Click the play button.
+
+## Backend
+
+1. Open the backend directory in VSCode.
+
+### One-time Setup:
+
+- Create a Python environment (requires Python 3.10).
+- Activate the Python environment:
+  ```bash
+  source [virtual environment name]/bin/activate
+  ```
+- install necessary packages
+
+### To run the Flask App:
+- Set flask environment
+  ```bash
+  export FLASK_APP=__init__.py
+  export FLASK_ENV=development
+  ```
+- run the app
+  ```bash
+  flask run
+  ```
+
+From here, you should be able to make API calls from the frontend to the backend. Results to the API calls will be printed to terminal
+- formation results: printed as a dictionary
+- dance analysis results: final percentage match score is printed, comparison video name final.mp4 is uploaded to backend folder
+
+
 
 # Features
 
@@ -123,41 +163,3 @@
 - For each frame, “good” and “bad” body angles are written on the screen, which displays a side-by-side view of the original and user video with landmarks superimposed.
 - In the end, a “percentage match” score is given (sort of like a karaoke score).
 - Eventual goal: Received API calls from front-end app, is passed 2 videos and timestamps (not completely implemented).
-
-
-
-# Project Setup and Running Instructions
-
-## Frontend
-
-1. Open XCode project.
-2. Connect a physical device to the computer.
-3. Select the physical device as the simulator target.
-4. Click the play button.
-
-## Backend
-
-1. Open the backend directory in VSCode.
-
-### One-time Setup:
-
-- Create a Python environment (requires Python 3.10).
-- Activate the Python environment:
-  ```bash
-  source [virtual environment name]/bin/activate
-  ```
-- install necessary packages
-
-### To run the Flask App:
-- Set flask environment
-  ```bash
-  source [virtual environment name]/bin/activate
-  ```
-- run the app
-  ```bash
-  source [virtual environment name]/bin/activate
-  ```
-
-From here, you should be able to make API calls from the frontend to the backend. Results to the API calls will be printed to terminal
-- formation results: printed as a dictionary
-- dance analysis results: final percentage match score is printed, comparison video name final.mp4 is uploaded to backend folder
